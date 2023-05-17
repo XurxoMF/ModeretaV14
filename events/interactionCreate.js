@@ -1,4 +1,5 @@
 const { Events } = require("discord.js");
+const { cooldowns } = client;
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -12,6 +13,31 @@ module.exports = {
             return;
         }
 
+        // COOLDOWNS
+        client.cooldowns = new Collection();
+
+        if (!cooldowns.has(command.data.name)) {
+            cooldowns.set(command.data.name, new Collection());
+        }
+
+        const now = Date.now();
+        const timestamps = cooldowns.get(command.data.name);
+        const defaultCooldownDuration = 3;
+        const cooldownAmount = (command.cooldown ?? defaultCooldownDuration) * 1000;
+
+        if (timestamps.has(interaction.user.id)) {
+            const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
+
+            if (now < expirationTime) {
+                const expiredTimestamp = Math.round(expirationTime / 1000);
+                return interaction.reply({ content: `Comando \`${command.data.name}\` en enfriamiento!. Puedes usarlo de nuevo en <t:${expiredTimestamp}:R>.`, ephemeral: true });
+            }
+        }
+
+        timestamps.set(interaction.user.id, now);
+        setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
+
+        // EXECUCIÓN
         try {
             await command.execute(interaction);
         } catch (error) {
