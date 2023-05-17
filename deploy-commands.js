@@ -30,7 +30,7 @@ const rest = new REST().setToken(token);
 (async () => {
     try {
         rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [] })
-            .then(() => console.log("Todos los comandos eliminados!"))
+            .then(() => console.log("Todos os comandos eliminados!"))
             .catch(console.error);
 
         console.log(`Refrescando ${commands.length} comandos de aplicación (/)`);
