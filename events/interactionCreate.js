@@ -1,36 +1,34 @@
-const { Events } = require("discord.js");
-const { cooldowns } = client;
+const { Events, Collection } = require("discord.js");
 
 module.exports = {
     name: Events.InteractionCreate,
-    async execute(interaction) {
+    async execute(client, interaction) {
+        const cooldowns = client.cooldowns;
+
         if (!interaction.isChatInputCommand()) return;
 
-        const command = interaction.client.commands.get(interaction.commandName);
+        const comando = interaction.client.comandos.get(interaction.commandName);
 
-        if (!command) {
+        if (!comando) {
             console.error(`No existe ningún comando con el nombre ${interaction.commandName}!`);
             return;
         }
 
-        // COOLDOWNS
-        client.cooldowns = new Collection();
-
-        if (!cooldowns.has(command.data.name)) {
-            cooldowns.set(command.data.name, new Collection());
+        if (!cooldowns.has(comando.data.name)) {
+            cooldowns.set(comando.data.name, new Collection());
         }
 
         const now = Date.now();
-        const timestamps = cooldowns.get(command.data.name);
+        const timestamps = cooldowns.get(comando.data.name);
         const defaultCooldownDuration = 3;
-        const cooldownAmount = (command.cooldown ?? defaultCooldownDuration) * 1000;
+        const cooldownAmount = (comando.cooldown ?? defaultCooldownDuration) * 1000;
 
         if (timestamps.has(interaction.user.id)) {
             const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
 
             if (now < expirationTime) {
                 const expiredTimestamp = Math.round(expirationTime / 1000);
-                return interaction.reply({ content: `Comando \`${command.data.name}\` en enfriamiento!. Puedes usarlo de nuevo en <t:${expiredTimestamp}:R>.`, ephemeral: true });
+                return interaction.reply({ content: `Comando \`${comando.data.name}\` en enfriamiento!. Puedes usarlo de nuevo en <t:${expiredTimestamp}:R>.`, ephemeral: true });
             }
         }
 
@@ -39,7 +37,7 @@ module.exports = {
 
         // EXECUCIÓN
         try {
-            await command.execute(interaction);
+            await comando.execute(interaction);
         } catch (error) {
             console.error(error);
             if (interaction.replied || interaction.deferred) {

@@ -18,6 +18,9 @@ const client = new Client({
     ],
 });
 
+// COOLDOWNS
+client.cooldowns = new Collection();
+
 // Importación de comandos e colección para estes
 client.comandos = new Collection();
 
@@ -32,7 +35,7 @@ for (const carpeta of carpetasComandos) {
         const comando = require(rutaArchivo);
         // Establece un novo item na colección de comandos con key = nome e value = módulo exportado
         if ("data" in comando && "execute" in comando) {
-            client.commands.set(comando.data.name, comando);
+            client.comandos.set(comando.data.name, comando);
             console.log(`Comando en ${rutaArchivo} cargado con éxito.`);
         } else {
             console.log(`[ADVERTENCIA] O comando en ${rutaArchivo} non contén data ou execute.`);
@@ -48,9 +51,9 @@ for (const file of eventFiles) {
     const filePath = path.join(rutaEventos, file);
     const event = require(filePath);
     if (event.once) {
-        client.once(event.name, (...args) => event.execute(...args));
+        client.once(event.name, (...args) => event.execute(client, ...args));
     } else {
-        client.on(event.name, (...args) => event.execute(...args));
+        client.on(event.name, (...args) => event.execute(client, ...args));
     }
 }
 
