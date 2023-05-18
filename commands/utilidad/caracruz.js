@@ -27,9 +27,10 @@ module.exports = {
             .setColor("#a30584")
             .addFields(
                 { name: "Cara:", value: cara, inline: true },
-                { name: "Cruz:", value: cruz, inline: true }
+                { name: "Cruz:", value: cruz, inline: true },
+                { name: "Ganador:", value: resultado }
             )
-            .addField("Ganador:", resultado);
+            .setThumbnail("https://i.postimg.cc/WbnP7DXw/caracruz.gif");
 
         interaction.reply({ embeds: [embed] });
     },
