@@ -1,4 +1,4 @@
-const { Events } = require("discord.js");
+const { Events, ActivityType } = require("discord.js");
 
 module.exports = {
     name: Events.ClientReady,
@@ -6,11 +6,10 @@ module.exports = {
     execute(client) {
         console.log("Preparada! UwU");
         client.user.setPresence({
-            status: "online",
             activities: [
                 {
-                    name: "todo en Astro Vaporwave",
-                    type: "WATCHING",
+                    name: `todo en Astro Vaporwave!`,
+                    type: ActivityType.Watching,
                 },
             ],
         });

@@ -29,14 +29,12 @@ const rest = new REST().setToken(token);
 // Deploy dos comandos
 (async () => {
     try {
-        rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: [] })
+        await rest
+            .put(Routes.applicationGuildCommands(clientId, guildId), { body: [] })
             .then(() => console.log("Todos os comandos eliminados!"))
             .catch(console.error);
 
-        console.log(`Refrescando ${commands.length} comandos de aplicación (/)`);
-
         const data = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands });
-
         console.log(`Refrscados con éxito ${data.length} comandos de aplicación (/)`);
     } catch (error) {
         // Xestión de erros
