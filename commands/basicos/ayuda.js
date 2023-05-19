@@ -157,8 +157,8 @@ module.exports = {
         });
 
         // Evento final de seleccións
-        collector.on("end", async (c) => {
-            interaction.editReply({ components: [] });
-        });
+        // collector.on("end", async (c) => {
+        //     interaction.editReply({ components: [] });
+        // });
     },
 };
