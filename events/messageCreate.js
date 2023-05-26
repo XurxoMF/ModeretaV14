@@ -43,8 +43,6 @@ module.exports = {
                 seriesConAster.forEach((s) => {
                     series.push(s[0].slice(5, -1));
                 });
-
-                console.log(series);
             } else if (message.content.includes("[3]")) {
                 // drop de series
                 const regex = /\*\*.*\*\*/gim;
@@ -52,15 +50,11 @@ module.exports = {
                 seriesConAster.forEach((s) => {
                     series.push(s[0].slice(2, -2));
                 });
-
-                console.log(series);
             } else if (message.content.includes("[1]")) {
                 // captcha drop
                 const regex = /\* • \*.*\*/gim;
                 const serieConAster = [...(await message.content.matchAll(regex))];
                 series.push(serieConAster[0][0].slice(5, -1));
-
-                console.log(series);
             }
 
             // busca os usuarios que coleccionan as series dropeadas
