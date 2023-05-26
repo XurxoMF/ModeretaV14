@@ -11,7 +11,10 @@ module.exports = {
             o.setName("usuario").setDescription("Usuario para del queires ver la lista.")
         ),
     async execute(interaction) {
-        const usuario = interaction.options.getMentionable("usuario") || interaction.user;
+        const usuarioId = interaction.options.getMentionable("usuario").id || interaction.user.id;
+        const usuarioNome =
+            interaction.options.getMentionable("usuario").user.username ||
+            interaction.user.username;
 
         const series = await SeriesUsersDB.findAll({ where: { userId: usuario.id } });
 
