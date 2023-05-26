@@ -29,7 +29,7 @@ module.exports = {
             });
         } else {
             interaction.reply({
-                content: `<@${userId}> No se ha encontrado la series **${serie}** en tu lista, usa el comando \`/listaseries\` para ver las que coleccionas!`,
+                content: `<@${userId}> No se ha encontrado la serie **${serie}** en tu lista, usa el comando \`/listaseries\` para ver las que coleccionas!`,
             });
         }
     },
