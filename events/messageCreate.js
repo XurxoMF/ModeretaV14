@@ -57,15 +57,20 @@ module.exports = {
                 series.push(serieConAster[0][0].slice(5, -1));
             }
 
+            console.log(series);
+
             // busca os usuarios que coleccionan as series dropeadas
             series.forEach(async (s) => {
                 const res = await SeriesUsersDB.findAll({
                     where: { serie: s },
                 });
+                console.log(res);
                 res.forEach((u) => {
                     userIds.add(u.userId);
                 });
             });
+
+            console.log(userIds);
 
             // envía pings as persoas cas series na súa lista
             if (userIds.size > 0) {
