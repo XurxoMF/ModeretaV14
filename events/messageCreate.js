@@ -1,5 +1,6 @@
 const { Events } = require("discord.js");
 const SeriesUsersDB = require("../schemas/seriesUsersDB");
+const sequelize = require("../sequelize");
 
 module.exports = {
     name: Events.MessageCreate,
@@ -32,7 +33,7 @@ module.exports = {
         // END RAID PING
 
         // SERIES USERS DROP
-        if (message.author.id === "950166445034188820") {
+        if (message.author.id === "556249326951727115") {
             let series = [];
             let userIds = new Set();
 
@@ -41,28 +42,36 @@ module.exports = {
                 const regex = /\* • \*.*\*/gim;
                 const seriesConAster = [...(await message.content.matchAll(regex))];
                 seriesConAster.forEach((s) => {
-                    series.push(s[0].slice(5, -1));
+                    series.push(s[0].slice(5, -1).toLowerCase());
                 });
             } else if (message.content.includes("[3]")) {
                 // drop de series
                 const regex = /\*\*.*\*\*/gim;
                 const seriesConAster = [...(await message.content.matchAll(regex))];
                 seriesConAster.forEach((s) => {
-                    series.push(s[0].slice(2, -2));
+                    series.push(s[0].slice(2, -2).toLowerCase());
                 });
             } else if (message.content.includes("[1]")) {
                 // captcha drop
                 const regex = /\* • \*.*\*/gim;
                 const serieConAster = [...(await message.content.matchAll(regex))];
-                series.push(serieConAster[0][0].slice(5, -1));
+                series.push(serieConAster[0][0].slice(5, -1).toLowerCase());
             }
+
+            console.log(series);
 
             // busca os usuarios que coleccionan as series dropeadas
             const getUsers = async () => {
                 const users = [];
                 for (const s of series) {
                     const res = await SeriesUsersDB.findAll({
-                        where: { serie: s },
+                        where: {
+                            serie: sequelize.where(
+                                sequelize.fn("LOWER", sequelize.col("serie")),
+                                "LIKE",
+                                s
+                            ),
+                        },
                     });
                     users.push(...res);
                 }
