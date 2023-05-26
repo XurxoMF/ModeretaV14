@@ -12,9 +12,9 @@ module.exports = {
         ),
     async execute(interaction) {
         const usuarioId =
-            interaction.options.getMentionable("usuario").user.id || interaction.user.id;
+            interaction.options.getMentionable("usuario")?.user.id || interaction.user.id;
         const usuarioNome =
-            interaction.options.getMentionable("usuario").user.username ||
+            interaction.options.getMentionable("usuario")?.user.username ||
             interaction.user.username;
 
         const series = await SeriesUsersDB.findAll({ where: { userId: usuarioId } });
