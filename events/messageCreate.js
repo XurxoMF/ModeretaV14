@@ -33,7 +33,7 @@ module.exports = {
         // END RAID PING
 
         // SERIES USERS DROP
-        if (message.author.id === "556249326951727115") {
+        if (message.author.id === "950166445034188820") {
             let series = [];
             let userIds = new Set();
 
@@ -57,8 +57,6 @@ module.exports = {
                 const serieConAster = [...(await message.content.matchAll(regex))];
                 series.push(serieConAster[0][0].slice(5, -1).toLowerCase());
             }
-
-            console.log(series);
 
             // busca os usuarios que coleccionan as series dropeadas
             const getUsers = async () => {
