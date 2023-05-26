@@ -11,7 +11,8 @@ module.exports = {
             o.setName("usuario").setDescription("Usuario para del queires ver la lista.")
         ),
     async execute(interaction) {
-        const usuarioId = interaction.options.getMentionable("usuario").id || interaction.user.id;
+        const usuarioId =
+            interaction.options.getMentionable("usuario").user.id || interaction.user.id;
         const usuarioNome =
             interaction.options.getMentionable("usuario").user.username ||
             interaction.user.username;
