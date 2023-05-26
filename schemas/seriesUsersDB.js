@@ -9,7 +9,6 @@ const SeriesUsersDB = db.define("SeriesUsers", {
     serie: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
     },
 });
 
