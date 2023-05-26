@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
+    uso: " **`<usuario>`**",
     data: new SlashCommandBuilder()
         .setName("cosquillas")
         .setDescription("Le haces cosquillas la persona a la que menciones.")
@@ -31,9 +32,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor("#a30584")
-            .setDescription(
-                `${userSend} le está haciendo cosquillas a ${userAct}!`
-            )
+            .setDescription(`${userSend} le está haciendo cosquillas a ${userAct}!`)
             .setImage(gifs[Math.floor(Math.random() * gifs.length)]);
 
         interaction.reply({

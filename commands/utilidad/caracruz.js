@@ -1,20 +1,15 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
+    uso: " **`<cara>`** **`<cruz>`**",
     data: new SlashCommandBuilder()
         .setName("caracruz")
         .setDescription("Juega al cara o cruz.")
         .addStringOption((str1) =>
-            str1
-                .setName("cara")
-                .setDescription("Cara de la moneda.")
-                .setRequired(true)
+            str1.setName("cara").setDescription("Cara de la moneda.").setRequired(true)
         )
         .addStringOption((str2) =>
-            str2
-                .setName("cruz")
-                .setDescription("Cruz de la moneda.")
-                .setRequired(true)
+            str2.setName("cruz").setDescription("Cruz de la moneda.").setRequired(true)
         ),
     async execute(interaction) {
         const cara = interaction.options.getString("cara", true);

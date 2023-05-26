@@ -6,6 +6,7 @@ const {
     EmbedBuilder,
     ComponentType,
 } = require("discord.js");
+const { log } = require("node:console");
 const fs = require("node:fs");
 
 module.exports = {
@@ -31,17 +32,17 @@ module.exports = {
                 if ("data" in comando && "execute" in comando) {
                     const nome = comando.data.name;
                     const descripcion = comando.data.description;
+                    const uso = comando.uso || "";
+                    // Nomes dos comandos embes base.
                     nomes[carpeta] += `${nome}, `;
+                    // Info completa comandos.
                     info[carpeta].push({
-                        name: `/${nome}`,
+                        name: `/${nome}${uso}`,
                         value: descripcion,
                     });
                 }
             }
-            nomes[carpeta] = nomes[carpeta].substr(
-                0,
-                nomes[carpeta].length - 2
-            );
+            nomes[carpeta] = nomes[carpeta].substr(0, nomes[carpeta].length - 2);
         }
 
         // Embed BASE
@@ -56,7 +57,9 @@ module.exports = {
                 **Reacciones** 🤝
                 \`\`\`${nomes["reacciones"]}\`\`\`
                 **Utilidad** ✅
-                \`\`\`${nomes["utilidad"]}\`\`\``
+                \`\`\`${nomes["utilidad"]}\`\`\`
+                **Sofi** 🍑
+                \`\`\`${nomes["sofi"]}\`\`\``
             )
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({
@@ -68,49 +71,54 @@ module.exports = {
             .setTitle("AYUDA - BÁSICOS 🌍")
             .setColor("#a30584")
             .addFields(...info["basicos"])
-            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png");
+            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
+            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
 
         // Embed ACCIONES
         const accionesEmbed = new EmbedBuilder()
             .setTitle("AYUDA - ACCIONES 🤙")
             .setColor("#a30584")
             .addFields(...info["acciones"])
-            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png");
+            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
+            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
 
         // Embed REACCIONES
         const reaccionesEmbed = new EmbedBuilder()
             .setTitle("AYUDA - REACCIONES 🤝")
             .setColor("#a30584")
             .addFields(...info["reacciones"])
-            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png");
+            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
+            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
 
         // Embed UTILIDAD
         const utilidadEmbed = new EmbedBuilder()
             .setTitle("AYUDA - UTILIDAD ✅")
             .setColor("#a30584")
             .addFields(...info["utilidad"])
-            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png");
+            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
+            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
+
+        // Embed SOFI
+        const sofiEmbed = new EmbedBuilder()
+            .setTitle("AYUDA - SOFI 🍑")
+            .setColor("#a30584")
+            .addFields(...info["sofi"])
+            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
+            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
 
         // Menú de selección e fila de componentes
         const select = new StringSelectMenuBuilder()
             .setCustomId("ayuda_categoria")
             .setPlaceholder("Selecciona categoría")
             .addOptions(
-                new StringSelectMenuOptionBuilder()
-                    .setLabel("Básicos 🌍")
-                    .setValue("basicos"),
-                new StringSelectMenuOptionBuilder()
-                    .setLabel("Acciones 🤙")
-                    .setValue("acciones"),
+                new StringSelectMenuOptionBuilder().setLabel("Básicos 🌍").setValue("basicos"),
+                new StringSelectMenuOptionBuilder().setLabel("Acciones 🤙").setValue("acciones"),
                 new StringSelectMenuOptionBuilder()
                     .setLabel("Reacciones 🤝")
                     .setValue("reacciones"),
-                new StringSelectMenuOptionBuilder()
-                    .setLabel("Utilidad ✅")
-                    .setValue("utilidad"),
-                new StringSelectMenuOptionBuilder()
-                    .setLabel("Inicio")
-                    .setValue("inicio")
+                new StringSelectMenuOptionBuilder().setLabel("Utilidad ✅").setValue("utilidad"),
+                new StringSelectMenuOptionBuilder().setLabel("Sofi 🍑").setValue("sofi"),
+                new StringSelectMenuOptionBuilder().setLabel("Inicio").setValue("inicio")
             );
         const row = new ActionRowBuilder().addComponents(select);
 
@@ -141,7 +149,6 @@ module.exports = {
                     i.update({ embeds: [basicosEmbed] });
                     break;
                 case "acciones":
-                    //todo: Cambiar cando se creen comandos
                     i.update({ embeds: [accionesEmbed] });
                     break;
                 case "reacciones":
@@ -149,6 +156,9 @@ module.exports = {
                     break;
                 case "utilidad":
                     i.update({ embeds: [utilidadEmbed] });
+                    break;
+                case "sofi":
+                    i.update({ embeds: [sofiEmbed] });
                     break;
                 default:
                     i.update({ embeds: [baseEmbed] });

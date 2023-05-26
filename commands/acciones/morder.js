@@ -1,14 +1,12 @@
 const { SlashCommandBuilder, EmbedBuilder, Embed } = require("discord.js");
 
 module.exports = {
+    uso: " **`<usuario>`**",
     data: new SlashCommandBuilder()
         .setName("morder")
         .setDescription("Le pegas un mordisco a la persona que menciones.")
         .addMentionableOption((mention) =>
-            mention
-                .setName("usuario")
-                .setDescription("Usuario al morderás.")
-                .setRequired(true)
+            mention.setName("usuario").setDescription("Usuario al morderás.").setRequired(true)
         ),
     async execute(interaction) {
         const userAct = interaction.options.getMentionable("usuario");
@@ -16,8 +14,7 @@ module.exports = {
 
         if (userSend.id === userAct.id) {
             interaction.reply({
-                content:
-                    "Te va a doler si te muerdes a ti mismo así que no te lo recomiendo.",
+                content: "Te va a doler si te muerdes a ti mismo así que no te lo recomiendo.",
             });
         }
 
@@ -33,9 +30,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor("#a30584")
-            .setDescription(
-                `${userSend} ha mordido a ${userAct} y le ha dejado marca!`
-            )
+            .setDescription(`${userSend} ha mordido a ${userAct} y le ha dejado marca!`)
             .setImage(gifs[Math.floor(Math.random() * gifs.length)]);
 
         interaction.reply({

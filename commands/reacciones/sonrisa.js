@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
-    data: new SlashCommandBuilder().setName("sonrisa").setDescription("Envia un gif sonriendo"),
+    data: new SlashCommandBuilder().setName("sonrisa").setDescription("Envia un gif sonriendo."),
     async execute(interaction) {
         const gifs = [
             "https://i.postimg.cc/L6jg61TQ/1.gif",

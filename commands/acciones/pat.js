@@ -1,13 +1,14 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
+    uso: " **`<usuario>`**",
     data: new SlashCommandBuilder()
-        .setName("caricias")
-        .setDescription("Acaricias a la persona a la que mencionas.")
+        .setName("pat")
+        .setDescription("Le hacer pat pat a la persona a la que menciones.")
         .addMentionableOption((mention) =>
             mention
                 .setName("usuario")
-                .setDescription("Usuario al que acariciar.")
+                .setDescription("Usuario al que hacerle pat pat.")
                 .setRequired(true)
         ),
     async execute(interaction) {
@@ -16,8 +17,7 @@ module.exports = {
 
         if (userSend.id === userAct.id) {
             interaction.reply({
-                content:
-                    "Estás falto de cariño?? Que alguien le de unas caricias!! :)",
+                content: "Estás falto de cariño?? Que alguien le de haga pat pat!! :)",
             });
         }
         const gifs = [
@@ -33,7 +33,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor("#a30584")
-            .setDescription(`${userSend} le ha dado una caricia a ${userAct} .`)
+            .setDescription(`${userSend} le hizo pat pat a ${userAct}`)
             .setImage(gifs[Math.floor(Math.random() * gifs.length)]);
 
         interaction.reply({

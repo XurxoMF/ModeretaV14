@@ -1,6 +1,7 @@
 const { Events, ActivityType } = require("discord.js");
 const db = require("../sequelize");
 const PingCountDB = require("../schemas/pingCountDB");
+const SeriesUsersDB = require("../schemas/seriesUsersDB");
 
 module.exports = {
     name: Events.ClientReady,
@@ -18,6 +19,8 @@ module.exports = {
         try {
             await PingCountDB.sync();
             console.log("PingCountDB lista!");
+            await SeriesUsersDB.sync();
+            console.log("SeriesUsersDB lista!");
         } catch (err) {
             console.error("[ERROR] Algunha tabla non se puido (re)crear correctamente:", err);
         }

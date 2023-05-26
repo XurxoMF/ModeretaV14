@@ -1,14 +1,12 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
+    uso: " **`<usuario>`**",
     data: new SlashCommandBuilder()
         .setName("abrazo")
         .setDescription("Le das un abrazo a la persona a la que menciones.")
         .addMentionableOption((mention) =>
-            mention
-                .setName("usuario")
-                .setDescription("Usuario al que abrazar.")
-                .setRequired(true)
+            mention.setName("usuario").setDescription("Usuario al que abrazar.").setRequired(true)
         ),
     async execute(interaction) {
         const userAct = interaction.options.getMentionable("usuario");

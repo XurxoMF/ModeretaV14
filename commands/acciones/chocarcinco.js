@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
+    uso: " **`<usuario>`**",
     data: new SlashCommandBuilder()
         .setName("chocarcinco")
         .setDescription("Le chocas los cinco a la persona a la que mencionas.")
@@ -16,8 +17,7 @@ module.exports = {
 
         if (userSend.id === userAct.id) {
             interaction.reply({
-                content:
-                    "Te chocas los cinco a si mismo, tan solo te has quedado? ;-;",
+                content: "Te chocas los cinco a si mismo, tan solo te has quedado? ;-;",
             });
         }
 
