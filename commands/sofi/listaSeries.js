@@ -16,7 +16,7 @@ module.exports = {
             interaction.options.getMentionable("usuario").user.username ||
             interaction.user.username;
 
-        const series = await SeriesUsersDB.findAll({ where: { userId: usuario.id } });
+        const series = await SeriesUsersDB.findAll({ where: { userId: usuarioId } });
 
         // Lista de series separadas por
         let seriesString = "";
@@ -26,7 +26,7 @@ module.exports = {
         seriesString.trim();
 
         const embed = new EmbedBuilder()
-            .setTitle(`Series coleccionadas por ${usuario.username}`)
+            .setTitle(`Series coleccionadas por ${usuarioNome}`)
             .setDescription(
                 seriesString.length >= 1
                     ? seriesString
