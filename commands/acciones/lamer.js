@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
-    uso: " **`<usuario>`**",
+    uso: " `<usuario>`",
     data: new SlashCommandBuilder()
         .setName("lamer")
         .setDescription("Le pegas un lametón a la persona a la que menciones.")

@@ -3,7 +3,7 @@ const SeriesUsersDB = require("../../schemas/seriesUsersDB");
 
 module.exports = {
     cooldown: 2,
-    uso: " `<usuario>`",
+    uso: " `[usuario]`",
     data: new SlashCommandBuilder()
         .setName("listaseries")
         .setDescription("Muestra las series que coleccionas tu o el usuario mencionado.")

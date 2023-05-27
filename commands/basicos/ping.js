@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("discord.js");
 const PingCountDB = require("../../schemas/pingCountDB");
 
 module.exports = {
-    uso: " `<mostrar ms>`",
+    uso: " `[mostrar ms]`",
     cooldown: 10,
     data: new SlashCommandBuilder()
         .setName("ping")

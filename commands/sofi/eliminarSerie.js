@@ -3,7 +3,7 @@ const SeriesUsersDB = require("../../schemas/seriesUsersDB");
 
 module.exports = {
     cooldown: 2,
-    uso: " **`<nombre serie>`**",
+    uso: " `<nombre serie>`",
     data: new SlashCommandBuilder()
         .setName("eliminarserie")
         .setDescription(

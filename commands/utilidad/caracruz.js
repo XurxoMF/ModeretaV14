@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
-    uso: " **`<cara>`** **`<cruz>`**",
+    uso: " `<cara>` `<cruz>`",
     data: new SlashCommandBuilder()
         .setName("caracruz")
         .setDescription("Juega al cara o cruz.")

@@ -66,13 +66,16 @@ module.exports = {
                 text: "Usa el desplegable para ver con más detalles cada una de las categorías",
             });
 
+        // Frases predefinidas
+        const paramType = "<obligatorio> | [opcional]";
+
         // Embed BÁSICOS
         const basicosEmbed = new EmbedBuilder()
             .setTitle("AYUDA - BÁSICOS 🌍")
             .setColor("#a30584")
             .addFields(...info["basicos"])
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
-            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
+            .setFooter({ text: paramType });
 
         // Embed ACCIONES
         const accionesEmbed = new EmbedBuilder()
@@ -80,7 +83,7 @@ module.exports = {
             .setColor("#a30584")
             .addFields(...info["acciones"])
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
-            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
+            .setFooter({ text: paramType });
 
         // Embed REACCIONES
         const reaccionesEmbed = new EmbedBuilder()
@@ -88,7 +91,7 @@ module.exports = {
             .setColor("#a30584")
             .addFields(...info["reacciones"])
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
-            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
+            .setFooter({ text: paramType });
 
         // Embed UTILIDAD
         const utilidadEmbed = new EmbedBuilder()
@@ -96,7 +99,7 @@ module.exports = {
             .setColor("#a30584")
             .addFields(...info["utilidad"])
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
-            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
+            .setFooter({ text: paramType });
 
         // Embed SOFI
         const sofiEmbed = new EmbedBuilder()
@@ -104,7 +107,7 @@ module.exports = {
             .setColor("#a30584")
             .addFields(...info["sofi"])
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
-            .setFooter({ text: "<parámetro> opcional. Si está en negrita es OBLIGATORIO!" });
+            .setFooter({ text: paramType });
 
         // Menú de selección e fila de componentes
         const select = new StringSelectMenuBuilder()
