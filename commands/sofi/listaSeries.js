@@ -16,6 +16,8 @@ module.exports = {
         const usuarioNome =
             interaction.options.getMentionable("usuario")?.user.username ||
             interaction.user.username;
+        const repliedTo = await message.channel.messages.fetch(message.reference.messageID);
+        console.log(repliedTo);
 
         const series = await SeriesUsersDB.findAll({ where: { userId: usuarioId } });
 

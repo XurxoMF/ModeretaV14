@@ -42,7 +42,7 @@ module.exports = {
                     });
                 }
             }
-            nomes[carpeta] = nomes[carpeta].substr(0, nomes[carpeta].length - 2);
+            nomes[carpeta] = nomes[carpeta].slice(0, -2);
         }
 
         // Embed BASE
