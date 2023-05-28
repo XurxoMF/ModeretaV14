@@ -19,6 +19,12 @@ module.exports = {
         const serie = interaction.options.getString("serie");
         const userId = interaction.user.id;
 
+        if (serie.toLowerCase() === "todo") {
+            return await interaction.reply({
+                content: `⚠️ <@${userId}> "**Todo**" no es un nombre de serie válido!`,
+            });
+        }
+
         const [rexistro, creado] = await SeriesUsersDB.findOrCreate({
             where: { userId: userId, serie: serie },
         });
