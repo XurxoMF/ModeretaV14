@@ -34,9 +34,9 @@ module.exports = {
         // RAID PING
         if (
             message.channel.id === "1108453318130409512" &&
-            message.author.id === "1108366419466395760"
+            message.author.id === "1108366419466395760" &&
+            message.embeds[0].title.startsWith("RAID: Ends")
         ) {
-            console.log(message.embeds);
             message.reply("<@&1100136018096705566> Nueva Raid!");
         }
         // END RAID PING
