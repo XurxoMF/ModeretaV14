@@ -12,6 +12,7 @@ module.exports = {
         const msOpcion = interaction.options.getBoolean("ms");
         const userId = interaction.user.id;
 
+        console.log("Antes a DB");
         const [rexistro, creado] = await PingCountDB.findOrCreate({
             where: { userId: userId },
             defaults: {
@@ -25,9 +26,11 @@ module.exports = {
             await rexistro.increment({ usos: 1 });
             vecesUsado = rexistro.usos + 1;
         }
+        console.log("Despóis a DB");
 
         let ping = Math.floor(interaction.client.ws.ping);
 
+        console.log("Antes de reply");
         return interaction.reply({
             content: `Pong! ${msOpcion ? `***\`${ping}\`***ms` : ""} | Usado ${vecesUsado} veces!`,
             ephemeral: true,
