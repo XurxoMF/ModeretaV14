@@ -51,6 +51,8 @@ module.exports = {
             .setDescription(
                 `**Básicos** 🌍
                 \`\`\`${nomes["basicos"]}\`\`\`
+                **Moderación** ⚒️
+                \`\`\`${nomes["moderacion"]}\`\`\`
                 **Acciones** 🤙
                 \`\`\`${nomes["acciones"]}\`\`\`
                 **Reacciones** 🤝
@@ -73,6 +75,14 @@ module.exports = {
             .setTitle("AYUDA - BÁSICOS 🌍")
             .setColor("#a30584")
             .addFields(...info["basicos"])
+            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
+            .setFooter({ text: paramType });
+
+        // Embed ACCIONES
+        const moderacionEmbed = new EmbedBuilder()
+            .setTitle("AYUDA - MODERACIÓN ⚒️")
+            .setColor("#a30584")
+            .addFields(...info["moderacion"])
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({ text: paramType });
 
@@ -114,6 +124,9 @@ module.exports = {
             .setPlaceholder("Selecciona categoría")
             .addOptions(
                 new StringSelectMenuOptionBuilder().setLabel("Básicos 🌍").setValue("basicos"),
+                new StringSelectMenuOptionBuilder()
+                    .setLabel("Moderación ⚒️")
+                    .setValue("moderacion"),
                 new StringSelectMenuOptionBuilder().setLabel("Acciones 🤙").setValue("acciones"),
                 new StringSelectMenuOptionBuilder()
                     .setLabel("Reacciones 🤝")
@@ -149,6 +162,9 @@ module.exports = {
                     break;
                 case "basicos":
                     i.update({ embeds: [basicosEmbed] });
+                    break;
+                case "moderacion":
+                    i.update({ embeds: [moderacionEmbed] });
                     break;
                 case "acciones":
                     i.update({ embeds: [accionesEmbed] });
