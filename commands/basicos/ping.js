@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-const PingCountDB = require("../../schemas/pingCountDB");
 
 module.exports = {
     uso: " `[mostrar ms]`",
@@ -8,11 +7,11 @@ module.exports = {
         .setName("ping")
         .setDescription("Responde con pong!")
         .addBooleanOption((o) => o.setName("ms").setDescription("Muestra o no los ms")),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const msOpcion = interaction.options.getBoolean("ms");
         const userId = interaction.user.id;
 
-        const [rexistro, creado] = await PingCountDB.findOrCreate({
+        const [rexistro, creado] = await db.PingCount.findOrCreate({
             where: { userId: userId },
             defaults: {
                 usos: 1,

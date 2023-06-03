@@ -11,7 +11,7 @@ module.exports = {
         .addStringOption((str2) =>
             str2.setName("cruz").setDescription("Cruz de la moneda.").setRequired(true)
         ),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const cara = interaction.options.getString("cara", true);
         const cruz = interaction.options.getString("cruz", true);
 

@@ -6,14 +6,13 @@ const {
     EmbedBuilder,
     ComponentType,
 } = require("discord.js");
-const { log } = require("node:console");
 const fs = require("node:fs");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("ayuda")
         .setDescription("Muestra información sobre los comandos qde Moderēta."),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         //nomes => ({ carpeta: "comando1, comando2,..., comandoN" })
         const nomes = {},
             //info => ({ carpeta: [ { name: /nome, value: descripcion }, { name: /nome, value: descripcion }, ... ] })

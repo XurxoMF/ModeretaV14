@@ -6,13 +6,10 @@ const {
     ComponentType,
     EmbedBuilder,
 } = require("discord.js");
-const SeriesUsersDB = require("../schemas/seriesUsersDB");
-const sequelize = require("../sequelize");
-const { Op } = require("sequelize");
 
 module.exports = {
     name: Events.MessageCreate,
-    async execute(client, message) {
+    async execute(client, db, message) {
         if (message.author.id === "748161670945177641") return;
 
         // MÚSICA
@@ -42,8 +39,8 @@ module.exports = {
         // END RAID PING
 
         // SERIES USERS DROP
-        //950166445034188820
-        //556249326951727115
+        //Sofi Helper = 950166445034188820
+        //Gio = 556249326951727115
         if (message.author.id === "950166445034188820") {
             let series = [];
             let userIds = new Set();
@@ -70,22 +67,22 @@ module.exports = {
             }
 
             // busca os usuarios que coleccionan as series dropeadas
-            const res = await SeriesUsersDB.findAll({
+            const res = await db.SeriesUsers.findAll({
                 where: {
                     serie: {
-                        [Op.or]: [
-                            sequelize.where(
-                                sequelize.fn("LOWER", sequelize.col("serie")),
+                        [db.Sequelize.Op.or]: [
+                            db.sequelize.where(
+                                db.sequelize.fn("LOWER", db.sequelize.col("serie")),
                                 "LIKE",
                                 series[0]
                             ),
-                            sequelize.where(
-                                sequelize.fn("LOWER", sequelize.col("serie")),
+                            db.sequelize.where(
+                                db.sequelize.fn("LOWER", db.sequelize.col("serie")),
                                 "LIKE",
                                 series[1]
                             ),
-                            sequelize.where(
-                                sequelize.fn("LOWER", sequelize.col("serie")),
+                            db.sequelize.where(
+                                db.sequelize.fn("LOWER", db.sequelize.col("serie")),
                                 "LIKE",
                                 series[2]
                             ),

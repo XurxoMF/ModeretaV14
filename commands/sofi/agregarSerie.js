@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require("discord.js");
-const SeriesUsersDB = require("../../schemas/seriesUsersDB");
 
 module.exports = {
     cooldown: 2,
@@ -15,7 +14,7 @@ module.exports = {
                 .setDescription("Serie que quieres añadir. SENSIBLE A MAYÚSCULAS!")
                 .setRequired(true)
         ),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const serie = interaction.options.getString("serie");
         const userId = interaction.user.id;
 
@@ -25,7 +24,7 @@ module.exports = {
             });
         }
 
-        const [rexistro, creado] = await SeriesUsersDB.findOrCreate({
+        const [rexistro, creado] = await db.SeriesUsers.findOrCreate({
             where: { userId: userId, serie: serie },
         });
 

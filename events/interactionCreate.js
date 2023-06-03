@@ -2,7 +2,7 @@ const { Events, Collection } = require("discord.js");
 
 module.exports = {
     name: Events.InteractionCreate,
-    async execute(client, interaction) {
+    async execute(client, db, interaction) {
         const cooldowns = client.cooldowns;
 
         if (!interaction.isChatInputCommand()) return;
@@ -28,7 +28,10 @@ module.exports = {
 
             if (now < expirationTime) {
                 const expiredTimestamp = Math.round(expirationTime / 1000);
-                return interaction.reply({ content: `Comando \`${comando.data.name}\` en enfriamiento!. Puedes usarlo de nuevo en <t:${expiredTimestamp}:R>.`, ephemeral: true });
+                return interaction.reply({
+                    content: `Comando \`${comando.data.name}\` en enfriamiento!. Puedes usarlo de nuevo en <t:${expiredTimestamp}:R>.`,
+                    ephemeral: true,
+                });
             }
         }
 
@@ -37,13 +40,23 @@ module.exports = {
 
         // EXECUCIÓN
         try {
-            await comando.execute(interaction);
+            //if (interaction.user.id === "556249326951727115") {
+            await comando.execute(client, db, interaction);
+            //} else {
+            //    interaction.reply("Comando desactivado por mantenimiento!");
+            //}
         } catch (error) {
             console.error(error);
             if (interaction.replied || interaction.deferred) {
-                await interaction.followUp({ content: "Ups! Ha ocurrido un error al ejecutar el comando!", ephemeral: true });
+                await interaction.followUp({
+                    content: "Ups! Ha ocurrido un error al ejecutar el comando!",
+                    ephemeral: true,
+                });
             } else {
-                await interaction.reply({ content: "Ups! Ha ocurrido un error al ejecutar el comando!", ephemeral: true });
+                await interaction.reply({
+                    content: "Ups! Ha ocurrido un error al ejecutar el comando!",
+                    ephemeral: true,
+                });
             }
         }
     },

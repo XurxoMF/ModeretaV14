@@ -6,7 +6,6 @@ const {
     EmbedBuilder,
     ComponentType,
 } = require("discord.js");
-const SeriesUsersDB = require("../../schemas/seriesUsersDB");
 
 module.exports = {
     cooldown: 2,
@@ -22,7 +21,7 @@ module.exports = {
                 .setDescription("Serie que quieres eliminar. SENSIBLE A MAYÚSCULAS!")
                 .setRequired(true)
         ),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const serie = interaction.options.getString("serie");
         const userId = interaction.user.id;
 
@@ -66,7 +65,7 @@ module.exports = {
                         components: [],
                     });
                 } else if (i.customId === "ok") {
-                    const cant = await SeriesUsersDB.destroy({
+                    const cant = await db.SeriesUsers.destroy({
                         where: { userId: userId },
                     });
 
@@ -82,7 +81,7 @@ module.exports = {
                 }
             });
         } else {
-            const cant = await SeriesUsersDB.destroy({
+            const cant = await db.SeriesUsers.destroy({
                 where: { userId: userId, serie: serie },
             });
 

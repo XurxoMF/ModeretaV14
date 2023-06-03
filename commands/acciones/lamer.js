@@ -8,7 +8,7 @@ module.exports = {
         .addMentionableOption((mention) =>
             mention.setName("usuario").setDescription("Persona a la que lamer.").setRequired(true)
         ),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 

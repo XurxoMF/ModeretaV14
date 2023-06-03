@@ -4,7 +4,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName("sonrojarse")
         .setDescription("Envia un gif sonrojándose."),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const gifs = [
             "https://i.postimg.cc/PfP7CmP4/1.gif",
             "https://i.postimg.cc/T3q7z04R/2.gif",

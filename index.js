@@ -2,6 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const config = require("./config.json");
+const db = require("./schemas");
 
 // Creción dun cliente
 const client = new Client({
@@ -51,9 +52,9 @@ for (const file of eventFiles) {
     const filePath = path.join(rutaEventos, file);
     const event = require(filePath);
     if (event.once) {
-        client.once(event.name, (...args) => event.execute(client, ...args));
+        client.once(event.name, (...args) => event.execute(client, db, ...args));
     } else {
-        client.on(event.name, (...args) => event.execute(client, ...args));
+        client.on(event.name, (...args) => event.execute(client, db, ...args));
     }
 }
 

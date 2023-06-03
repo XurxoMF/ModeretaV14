@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const SeriesUsersDB = require("../../schemas/seriesUsersDB");
 
 module.exports = {
     cooldown: 2,
@@ -10,14 +9,14 @@ module.exports = {
         .addMentionableOption((o) =>
             o.setName("usuario").setDescription("Usuario para del queires ver la lista.")
         ),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const usuarioId =
             interaction.options.getMentionable("usuario")?.user.id || interaction.user.id;
         const usuarioNome =
             interaction.options.getMentionable("usuario")?.user.username ||
             interaction.user.username;
 
-        const series = await SeriesUsersDB.findAll({ where: { userId: usuarioId } });
+        const series = await db.SeriesUsers.findAll({ where: { userId: usuarioId } });
 
         // Lista de series separadas por
         let seriesString = "";

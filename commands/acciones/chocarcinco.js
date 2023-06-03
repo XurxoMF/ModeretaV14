@@ -11,7 +11,7 @@ module.exports = {
                 .setDescription("Usuario al que le chocas los cinco.")
                 .setRequired(true)
         ),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 

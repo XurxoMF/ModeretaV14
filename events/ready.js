@@ -1,15 +1,12 @@
 const { Events, ActivityType } = require("discord.js");
-const db = require("../sequelize");
-const PingCountDB = require("../schemas/pingCountDB");
-const SeriesUsersDB = require("../schemas/seriesUsersDB");
 
 module.exports = {
     name: Events.ClientReady,
     once: true,
-    async execute(client) {
+    async execute(client, db) {
         // Test conexión Sequelize
         try {
-            await db.authenticate();
+            await db.sequelize.authenticate();
             console.log("ModeretaDB conectada con éxito!");
         } catch (error) {
             console.error("[ERROR] ModeretaDB non se puido conectar:", error);
@@ -17,10 +14,8 @@ module.exports = {
 
         // Sicronización de tablas.
         try {
-            await PingCountDB.sync();
-            console.log("PingCountDB lista!");
-            await SeriesUsersDB.sync();
-            console.log("SeriesUsersDB lista!");
+            await db.sequelize.sync();
+            console.log("Tablas cargadas con éxito!");
         } catch (err) {
             console.error("[ERROR] Algunha tabla non se puido (re)crear correctamente:", err);
         }

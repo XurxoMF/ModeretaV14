@@ -11,7 +11,7 @@ module.exports = {
                 .setDescription("Usuario al que te quedarás mirando fijamente.")
                 .setRequired(true)
         ),
-    async execute(interaction) {
+    async execute(client, db, interaction) {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 
