@@ -1,11 +1,8 @@
-const { Events, EmbedBuilder } = require("discord.js");
+const { Events, EmbedBuilder, Collection } = require("discord.js");
 
 module.exports = {
     name: Events.MessageReactionAdd,
     async execute(client, db, reaction, user) {
-        //console.log(reaction._emoji.name, reaction.count);
-        console.log(reaction.message.attachments);
-
         if (
             reaction.message.channelId === "742804647894581289" &&
             reaction.message.author.id === "646937666251915264" &&
@@ -19,8 +16,15 @@ module.exports = {
             const pogdrops = await client.channels.cache.get("831596499980779530");
 
             const pogdrop = new EmbedBuilder()
+                .setTitle("Ir al drop!")
+                .setURL(
+                    client.guilds.cache
+                        .get(reaction.message.guildId)
+                        .channels.cache.get(reaction.message.channelId)
+                        .messages.cache.get(reaction.message.id).url
+                )
                 .setDescription(reaction.message.content)
-                .setImage(reaction.message.attachments[0].url)
+                .setImage(reaction.message.attachments.first().url)
                 .setColor("#ff8800");
 
             pogdrops.send({ embeds: [pogdrop] });
