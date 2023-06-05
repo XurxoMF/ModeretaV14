@@ -6,6 +6,8 @@ const {
     ComponentType,
     EmbedBuilder,
 } = require("discord.js");
+const xp = require("../utils/xpHelpers");
+const cooldowns = new Set();
 
 module.exports = {
     name: Events.MessageCreate,
@@ -13,15 +15,15 @@ module.exports = {
         if (message.author.id === "748161670945177641") return;
 
         // MÚSICA
-        const enlacesMusica = [
-            "https://www.youtube.com/watch",
-            "https://open.spotify.com",
-            "https://youtu.be",
-            "https://music.youtube.com/watch",
-        ];
-
         if (message.channel.id === "726155485236953088") {
-            if (enlacesMusica.some((l) => message.content.includes(l))) {
+            if (
+                [
+                    "https://www.youtube.com/watch",
+                    "https://open.spotify.com",
+                    "https://youtu.be",
+                    "https://music.youtube.com/watch",
+                ].some((l) => message.content.includes(l))
+            ) {
                 await message.react("👍");
                 await message.react("👎");
             }
@@ -39,7 +41,7 @@ module.exports = {
         // END RAID PING
 
         // SERIES USERS DROP
-        //Sofi Helper = 950166445034188820
+        //Sofu = 950166445034188820
         //Gio = 556249326951727115
         if (message.author.id === "950166445034188820") {
             let series = [];
@@ -152,5 +154,16 @@ module.exports = {
             }
         }
         // END SERIES USERS DROP
+
+        // NIVELES
+        if (!message.inGuild() || message.author.bot || cooldowns.has(message.author.id)) return;
+
+        xp.subirXp(client, db, message);
+
+        cooldowns.add(message.author.id);
+        setTimeout(() => {
+            cooldowns.delete(message.author.id);
+        }, 60000);
+        // NIVELES
     },
 };
