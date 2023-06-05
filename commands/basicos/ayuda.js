@@ -53,6 +53,8 @@ module.exports = {
                 \`\`\`${nomes["basicos"]}\`\`\`
                 **Moderación** ⚒️
                 \`\`\`${nomes["moderacion"]}\`\`\`
+                **Niveles** 🆙
+                \`\`\`${nomes["niveles"]}\`\`\`
                 **Acciones** 🤙
                 \`\`\`${nomes["acciones"]}\`\`\`
                 **Reacciones** 🤝
@@ -78,11 +80,19 @@ module.exports = {
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({ text: paramType });
 
-        // Embed ACCIONES
+        // Embed MODERACIÓN
         const moderacionEmbed = new EmbedBuilder()
             .setTitle("AYUDA - MODERACIÓN ⚒️")
             .setColor("#a30584")
             .addFields(...info["moderacion"])
+            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
+            .setFooter({ text: paramType });
+
+        // Embed NIVELES
+        const nivelesEmbed = new EmbedBuilder()
+            .setTitle("AYUDA - NIVELES 🆙")
+            .setColor("#a30584")
+            .addFields(...info["niveles"])
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({ text: paramType });
 
@@ -127,6 +137,7 @@ module.exports = {
                 new StringSelectMenuOptionBuilder()
                     .setLabel("Moderación ⚒️")
                     .setValue("moderacion"),
+                new StringSelectMenuOptionBuilder().setLabel("Niveles 🆙").setValue("niveles"),
                 new StringSelectMenuOptionBuilder().setLabel("Acciones 🤙").setValue("acciones"),
                 new StringSelectMenuOptionBuilder()
                     .setLabel("Reacciones 🤝")
@@ -165,6 +176,9 @@ module.exports = {
                     break;
                 case "moderacion":
                     i.update({ embeds: [moderacionEmbed] });
+                    break;
+                case "niveles":
+                    i.update({ embeds: [nivelesEmbed] });
                     break;
                 case "acciones":
                     i.update({ embeds: [accionesEmbed] });

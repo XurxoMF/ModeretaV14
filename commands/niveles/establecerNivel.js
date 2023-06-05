@@ -6,7 +6,7 @@ module.exports = {
     cooldown: 10,
     data: new SlashCommandBuilder()
         .setName("establecernivel")
-        .setDescription("Cambia el nivel de un usuario!")
+        .setDescription("Cambia el nivel de un usuario.")
         .addMentionableOption((o) =>
             o
                 .setName("usuario")

@@ -12,6 +12,7 @@ module.exports = xp = {
     randomXp,
     xpNecesaria,
     asignarRoles,
+    roles,
 };
 
 async function subirXp(client, db, message) {
