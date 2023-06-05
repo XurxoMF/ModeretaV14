@@ -10,15 +10,3 @@ module.exports = {
         
     },
 };
-
-
-
-
-
-Modereta
-"token": "NzQ4MTYxNjcwOTQ1MTc3NjQx.G9l27C.rgXCMCeZnLzb3k3fTGtsFgjBZPX4RYUA87ER3c",
-"clientId": "748161670945177641",
-
-Beta Modereta
-"token": "MTExNTM4MDY5ODY0MDAyNzcxMg.GMcqrG.qegQ4vZuQ1-IC0kYVGm0MEy1VMnzd3Ff5CntqA",
-"clientId": "1115380698640027712",
