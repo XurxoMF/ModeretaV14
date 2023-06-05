@@ -3,7 +3,6 @@ const path = require("node:path");
 const { Client, Collection, GatewayIntentBits, EmbedBuilder } = require("discord.js");
 const config = require("./config.json");
 const db = require("./schemas");
-
 // Creción dun cliente
 const client = new Client({
     intents: [

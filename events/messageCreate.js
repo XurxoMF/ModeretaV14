@@ -68,89 +68,91 @@ module.exports = {
                 series.push(serieConAster[0][0].slice(5, -1).toLowerCase());
             }
 
-            // busca os usuarios que coleccionan as series dropeadas
-            const res = await db.SeriesUsers.findAll({
-                where: {
-                    serie: {
-                        [db.Sequelize.Op.or]: [
-                            db.sequelize.where(
-                                db.sequelize.fn("LOWER", db.sequelize.col("serie")),
-                                "LIKE",
-                                series[0]
-                            ),
-                            db.sequelize.where(
-                                db.sequelize.fn("LOWER", db.sequelize.col("serie")),
-                                "LIKE",
-                                series[1]
-                            ),
-                            db.sequelize.where(
-                                db.sequelize.fn("LOWER", db.sequelize.col("serie")),
-                                "LIKE",
-                                series[2]
-                            ),
-                        ],
+            if (series.length > 0) {
+                // busca os usuarios que coleccionan as series dropeadas
+                const res = await db.SeriesUsers.findAll({
+                    where: {
+                        serie: {
+                            [db.Sequelize.Op.or]: [
+                                db.sequelize.where(
+                                    db.sequelize.fn("LOWER", db.sequelize.col("serie")),
+                                    "LIKE",
+                                    series[0]
+                                ),
+                                db.sequelize.where(
+                                    db.sequelize.fn("LOWER", db.sequelize.col("serie")),
+                                    "LIKE",
+                                    series[1]
+                                ),
+                                db.sequelize.where(
+                                    db.sequelize.fn("LOWER", db.sequelize.col("serie")),
+                                    "LIKE",
+                                    series[2]
+                                ),
+                            ],
+                        },
                     },
-                },
-            });
-
-            const users = [...res];
-            const userSeries = {};
-
-            for (const u of users) {
-                const id = u.getDataValue("userId");
-                const serie = u.getDataValue("serie").toLowerCase();
-                userIds.add(id);
-                if (userSeries[serie] === undefined) {
-                    userSeries[serie] = [id];
-                } else {
-                    userSeries[serie].push(id);
-                }
-            }
-
-            // envía pings as persoas cas series na súa lista
-            if (userIds.size > 0) {
-                let res = "";
-                for (const uid of userIds) {
-                    res += `<@${uid}> `;
-                }
-
-                const boton = new ButtonBuilder()
-                    .setCustomId("lista_series")
-                    .setLabel("📑")
-                    .setStyle(ButtonStyle.Primary);
-                const row = new ActionRowBuilder().addComponents(boton);
-
-                const resMes = await message.reply({
-                    content: `${res}se dropearon cartas de tu lista!`,
-                    components: [row],
                 });
 
-                const collector = resMes.createMessageComponentCollector({
-                    componentType: ComponentType.Button,
-                    idle: 50_000,
-                });
+                const users = [...res];
+                const userSeries = {};
 
-                collector.on("collect", async (i) => {
-                    const fields = [];
-                    for (const s in userSeries) {
-                        let line = ``;
-                        for (const uid of userSeries[s]) {
-                            line += `<@${uid}>, `;
-                        }
-                        line = line.slice(0, -2);
-                        fields.push({ name: s, value: line });
+                for (const u of users) {
+                    const id = u.getDataValue("userId");
+                    const serie = u.getDataValue("serie").toLowerCase();
+                    userIds.add(id);
+                    if (userSeries[serie] === undefined) {
+                        userSeries[serie] = [id];
+                    } else {
+                        userSeries[serie].push(id);
+                    }
+                }
+
+                // envía pings as persoas cas series na súa lista
+                if (userIds.size > 0) {
+                    let res = "";
+                    for (const uid of userIds) {
+                        res += `<@${uid}> `;
                     }
 
-                    const embed = new EmbedBuilder()
-                        .setTitle("Series coleccionadas por cada usuario:")
-                        .setColor("#a30584")
-                        .addFields(...fields);
+                    const boton = new ButtonBuilder()
+                        .setCustomId("lista_series")
+                        .setLabel("📑")
+                        .setStyle(ButtonStyle.Primary);
+                    const row = new ActionRowBuilder().addComponents(boton);
 
-                    i.reply({
-                        embeds: [embed],
-                        ephemeral: true,
+                    const resMes = await message.reply({
+                        content: `${res}se dropearon cartas de tu lista!`,
+                        components: [row],
                     });
-                });
+
+                    const collector = resMes.createMessageComponentCollector({
+                        componentType: ComponentType.Button,
+                        idle: 50_000,
+                    });
+
+                    collector.on("collect", async (i) => {
+                        const fields = [];
+                        for (const s in userSeries) {
+                            let line = ``;
+                            for (const uid of userSeries[s]) {
+                                line += `<@${uid}>, `;
+                            }
+                            line = line.slice(0, -2);
+                            fields.push({ name: s, value: line });
+                        }
+
+                        const embed = new EmbedBuilder()
+                            .setTitle("Series coleccionadas por cada usuario:")
+                            .setColor("#a30584")
+                            .addFields(...fields);
+
+                        i.reply({
+                            embeds: [embed],
+                            ephemeral: true,
+                        });
+                    });
+                }
             }
         }
         // END SERIES USERS DROP
