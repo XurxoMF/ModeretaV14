@@ -50,19 +50,19 @@ module.exports = {
             .setColor("#a30584")
             .setDescription(
                 `**Básicos** 🌍
-                \`\`\`${nomes["basicos"]}\`\`\`
-                **Moderación** ⚒️
-                \`\`\`${nomes["moderacion"]}\`\`\`
-                **Niveles** 🆙
-                \`\`\`${nomes["niveles"]}\`\`\`
-                **Acciones** 🤙
-                \`\`\`${nomes["acciones"]}\`\`\`
-                **Reacciones** 🤝
-                \`\`\`${nomes["reacciones"]}\`\`\`
-                **Utilidad** ✅
-                \`\`\`${nomes["utilidad"]}\`\`\`
-                **Sofi** 🍑
-                \`\`\`${nomes["sofi"]}\`\`\``
+            \`\`\`${nomes["basicos"]}\`\`\`
+            **Moderación** ⚒️
+            \`\`\`${nomes["moderacion"]}\`\`\`
+            **Niveles** 🆙
+            \`\`\`${nomes["niveles"]}\`\`\`
+            **Acciones** 🤙
+            \`\`\`${nomes["acciones"]}\`\`\`
+            **Reacciones** 🤝
+            \`\`\`${nomes["reacciones"]}\`\`\`
+            **Utilidad** ✅
+            \`\`\`${nomes["utilidad"]}\`\`\`
+            **Sofi** 🍑
+            \`\`\`${nomes["sofi"]}\`\`\``
             )
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({

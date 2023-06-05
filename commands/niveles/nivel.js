@@ -20,10 +20,7 @@ module.exports = {
             .setColor("#ff00ff");
 
         if (nivel === null) {
-            embed.setDescription(
-                `**\`Nivel:\`** **0**
-                **\`XP:\`** **0** / ${xp.xpNecesaria(0)}`
-            );
+            embed.setDescription(`**\`Nivel:\`** **0**\n**\`XP:\`** **0** / ${xp.xpNecesaria(0)}`);
         } else {
             let roles = ``;
             for (const lvl in xp.roles) {
@@ -34,9 +31,9 @@ module.exports = {
                 }
             }
             embed.setDescription(
-                `**\`Nivel:\`** **${nivel.nivel}**
-                **\`XP:\`** **${nivel.xp}** / ${xp.xpNecesaria(nivel.nivel)}
-                **\`Roles:\`**${roles}`
+                `**\`Nivel:\`** **${nivel.nivel}**\n**\`XP:\`** **${nivel.xp}** / ${xp.xpNecesaria(
+                    nivel.nivel
+                )}\n**\`Roles:\`**${roles}`
             );
         }
 
