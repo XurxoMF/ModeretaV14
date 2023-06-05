@@ -27,6 +27,7 @@ module.exports = {
 
         let ping = Math.floor(interaction.client.ws.ping);
 
+        console.log("done");
         return interaction.reply({
             content: `Pong! ${msOpcion ? `***\`${ping}\`***ms` : ""} | Usado ${vecesUsado} veces!`,
             ephemeral: true,

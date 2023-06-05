@@ -19,6 +19,8 @@ const client = new Client({
     ],
 });
 
+client.rest.on("rateLimited", (info) => console.log("rate limited"));
+
 // TEMPORIZADORES
 setInterval(async () => {
     // MUTEOS

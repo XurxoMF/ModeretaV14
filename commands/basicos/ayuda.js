@@ -135,6 +135,7 @@ module.exports = {
             );
         const row = new ActionRowBuilder().addComponents(select);
 
+        console.log("done");
         const mensaje = await interaction.reply({
             embeds: [baseEmbed],
             components: [row],
