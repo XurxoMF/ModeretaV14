@@ -29,7 +29,7 @@ module.exports = {
             if (now < expirationTime) {
                 const expiredTimestamp = Math.round(expirationTime / 1000);
                 return interaction.reply({
-                    content: `Comando \`${comando.data.name}\` en enfriamiento!. Puedes usarlo de nuevo en <t:${expiredTimestamp}:R>.`,
+                    content: `Comando \`${comando.data.name}\` en enfriamiento!. Puedes usarlo de nuevo <t:${expiredTimestamp}:R>.`,
                     ephemeral: true,
                 });
             }
