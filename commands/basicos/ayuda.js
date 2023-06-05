@@ -49,20 +49,7 @@ module.exports = {
             .setTitle("AYUDA - LISTA DE COMANDOS")
             .setColor("#a30584")
             .setDescription(
-                `**Básicos** 🌍
-            \`\`\`${nomes["basicos"]}\`\`\`
-            **Moderación** ⚒️
-            \`\`\`${nomes["moderacion"]}\`\`\`
-            **Niveles** 🆙
-            \`\`\`${nomes["niveles"]}\`\`\`
-            **Acciones** 🤙
-            \`\`\`${nomes["acciones"]}\`\`\`
-            **Reacciones** 🤝
-            \`\`\`${nomes["reacciones"]}\`\`\`
-            **Utilidad** ✅
-            \`\`\`${nomes["utilidad"]}\`\`\`
-            **Sofi** 🍑
-            \`\`\`${nomes["sofi"]}\`\`\``
+                `**Básicos** 🌍\n\`\`\`${nomes["basicos"]}\`\`\`\n**Moderación** ⚒️\n\`\`\`${nomes["moderacion"]}\`\`\`\n**Niveles** 🆙\n\`\`\`${nomes["niveles"]}\`\`\`\n**Acciones** 🤙\n\`\`\`${nomes["acciones"]}\`\`\`\n**Reacciones** 🤝\n\`\`\`${nomes["reacciones"]}\`\`\`\n**Utilidad** ✅\n\`\`\`${nomes["utilidad"]}\`\`\`\n**Sofi** 🍑\n\`\`\`${nomes["sofi"]}\`\`\``
             )
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({
