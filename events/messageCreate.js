@@ -5,12 +5,21 @@ const {
     ButtonStyle,
     ComponentType,
     EmbedBuilder,
+    Client,
+    Message,
 } = require("discord.js");
 const xp = require("../utils/xpHelpers");
 const cooldowns = new Set();
 
 module.exports = {
     name: Events.MessageCreate,
+    /**
+     *
+     * @param {Client} client
+     * @param {db} db
+     * @param {Message} message
+     * @returns
+     */
     async execute(client, db, message) {
         if (message.author.id === "748161670945177641") return;
 
@@ -156,6 +165,15 @@ module.exports = {
             }
         }
         // END SERIES USERS DROP
+
+        // KARUTA DROP PING
+        if (
+            message.author.id === "646937666251915264" &&
+            message.content.includes("I'm dropping 3 cards since this server is currently active!")
+        ) {
+            message.reply({ content: "<@&1096463668977336383> Karuta está dropeando cartas!" });
+        }
+        // END KARUTA DROP PING
 
         // NIVELES
         if (!message.inGuild() || message.author.bot || cooldowns.has(message.author.id)) return;
