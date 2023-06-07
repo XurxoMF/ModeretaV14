@@ -52,8 +52,8 @@ async function subirXp(client, db, message) {
 }
 
 function randomXp() {
-    let min = 5,
-        max = 15;
+    let min = 10,
+        max = 20;
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
