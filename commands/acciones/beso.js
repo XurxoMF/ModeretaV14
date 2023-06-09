@@ -12,12 +12,6 @@ module.exports = {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 
-        if (userSend.id === userAct.id) {
-            interaction.reply({
-                content: "Es un poco difícil que te beses a ti mismo no crees?",
-            });
-        }
-
         const gifs = [
             "https://i.postimg.cc/Vsp0djdq/1.gif",
             "https://i.postimg.cc/K8yK5x74/2.gif",

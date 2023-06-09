@@ -12,12 +12,6 @@ module.exports = {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 
-        if (userSend.id === userAct.id) {
-            interaction.reply({
-                content: "Si quieres un abrazo solo pídelo >_<",
-            });
-        }
-
         const gifs = [
             "https://i.postimg.cc/PrpPmNBm/1.gif",
             "https://i.postimg.cc/vTp8PLp5/2.gif",

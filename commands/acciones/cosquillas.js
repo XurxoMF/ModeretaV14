@@ -15,12 +15,6 @@ module.exports = {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 
-        if (userSend.id === userAct.id) {
-            interaction.reply({
-                content: "Costiquillas a ti mismo?",
-            });
-        }
-
         const gifs = [
             "https://i.postimg.cc/RhhtjBXK/2.gif",
             "https://i.postimg.cc/hGndKx2S/3.gif",

@@ -15,12 +15,6 @@ module.exports = {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 
-        if (userSend.id === userAct.id) {
-            interaction.reply({
-                content: "Para observarte a ti mismo necesitas un espejo!",
-            });
-        }
-
         const gifs = [
             "https://i.postimg.cc/6Qwxz5pj/1.gif",
             "https://i.postimg.cc/ZKGSBLth/2.gif",

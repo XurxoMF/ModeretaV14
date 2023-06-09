@@ -12,12 +12,6 @@ module.exports = {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 
-        if (userSend.id === userAct.id) {
-            interaction.reply({
-                content: "Tenemos a un medio gato entre nosotros :)",
-            });
-        }
-
         const gifs = [
             "https://i.postimg.cc/1t26hdTd/1.gif",
             "https://i.postimg.cc/pdVKDzzs/3.gif",

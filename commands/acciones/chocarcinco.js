@@ -15,12 +15,6 @@ module.exports = {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 
-        if (userSend.id === userAct.id) {
-            interaction.reply({
-                content: "Te chocas los cinco a si mismo, tan solo te has quedado? ;-;",
-            });
-        }
-
         const gifs = [
             "https://i.postimg.cc/d3YXB5Bb/1.gif",
             "https://i.postimg.cc/h4LNjq4c/2.gif",

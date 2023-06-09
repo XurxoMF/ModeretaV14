@@ -12,12 +12,6 @@ module.exports = {
         const userAct = interaction.options.getMentionable("usuario");
         const userSend = interaction.member;
 
-        if (userSend.id === userAct.id) {
-            interaction.reply({
-                content: "Felicita a otro usuario no a ti ^^",
-            });
-        }
-
         const embed = new EmbedBuilder()
             .setColor("#a30584")
             .setDescription(`Omedetou ${userAct}! 👏`)
