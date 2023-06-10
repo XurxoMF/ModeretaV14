@@ -146,10 +146,17 @@ module.exports = {
                             .setColor("#a30584")
                             .addFields(...fields);
 
-                        i.reply({
-                            embeds: [embed],
-                            ephemeral: true,
-                        });
+                        try {
+                            i.reply({
+                                embeds: [embed],
+                                ephemeral: true,
+                            });
+                        } catch (err) {
+                            i.reply({
+                                content: "Ha ocurrido un error, inténtalo de nuevo ^^",
+                                ephemeral: true,
+                            });
+                        }
                     });
                 }
             }
