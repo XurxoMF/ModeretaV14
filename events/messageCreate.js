@@ -172,6 +172,25 @@ module.exports = {
         }
         // END KARUTA DROP PING
 
+        // KARUTA DROP REMINDER
+        if (
+            message.author.id === "646937666251915264" &&
+            message.content.includes(" is dropping ")
+        ) {
+            const user = message.content.split(" ")[0].slice(2, -1);
+
+            const noti = await db.KarutaDropReminder.findOne({
+                where: { userId: user },
+            });
+
+            if (noti !== null) {
+                setTimeout(() => {
+                    message.channel.send({ content: `<@${user}> ya puedes dropear de nuevo!` });
+                }, 1_800_000);
+            }
+        }
+        // END KARUTA DROP REMINDER
+
         // NIVELES
         if (!message.inGuild() || message.author.bot || cooldowns.has(message.author.id)) return;
 
