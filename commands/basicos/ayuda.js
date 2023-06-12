@@ -49,7 +49,7 @@ module.exports = {
             .setTitle("AYUDA - LISTA DE COMANDOS")
             .setColor("#a30584")
             .setDescription(
-                `**Básicos** 🌍\n\`\`\`${nomes["basicos"]}\`\`\`\n**Moderación** ⚒️\n\`\`\`${nomes["moderacion"]}\`\`\`\n**Niveles** 🆙\n\`\`\`${nomes["niveles"]}\`\`\`\n**Acciones** 🤙\n\`\`\`${nomes["acciones"]}\`\`\`\n**Reacciones** 🤝\n\`\`\`${nomes["reacciones"]}\`\`\`\n**Utilidad** ✅\n\`\`\`${nomes["utilidad"]}\`\`\`\n**Sofi** 🍑\n\`\`\`${nomes["sofi"]}\`\`\``
+                `**Básicos** 🌍\n\`\`\`${nomes["basicos"]}\`\`\`\n**Moderación** ⚒️\n\`\`\`${nomes["moderacion"]}\`\`\`\n**Niveles** 🆙\n\`\`\`${nomes["niveles"]}\`\`\`\n**Acciones** 🤙\n\`\`\`${nomes["acciones"]}\`\`\`\n**Reacciones** 🤝\n\`\`\`${nomes["reacciones"]}\`\`\`\n**Utilidad** ✅\n\`\`\`${nomes["utilidad"]}\`\`\`\n**Sofi** 🍑\n\`\`\`${nomes["sofi"]}\`\`\`**Bots** 🤖\n\`\`\`${nomes["bots"]}\`\`\``
             )
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({
@@ -115,6 +115,14 @@ module.exports = {
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({ text: paramType });
 
+        // Embed BOTS
+        const botsEmbed = new EmbedBuilder()
+            .setTitle("AYUDA - BOTS 🤖")
+            .setColor("#a30584")
+            .addFields(...info["bots"])
+            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
+            .setFooter({ text: paramType });
+
         // Menú de selección e fila de componentes
         const select = new StringSelectMenuBuilder()
             .setCustomId("ayuda_categoria")
@@ -131,6 +139,7 @@ module.exports = {
                     .setValue("reacciones"),
                 new StringSelectMenuOptionBuilder().setLabel("Utilidad ✅").setValue("utilidad"),
                 new StringSelectMenuOptionBuilder().setLabel("Sofi 🍑").setValue("sofi"),
+                new StringSelectMenuOptionBuilder().setLabel("Bots 🤖").setValue("bots"),
                 new StringSelectMenuOptionBuilder().setLabel("Inicio").setValue("inicio")
             );
         const row = new ActionRowBuilder().addComponents(select);
@@ -178,6 +187,9 @@ module.exports = {
                     break;
                 case "sofi":
                     i.update({ embeds: [sofiEmbed] });
+                    break;
+                case "bots":
+                    i.update({ embeds: [botsEmbed] });
                     break;
                 default:
                     i.update({ embeds: [baseEmbed] });

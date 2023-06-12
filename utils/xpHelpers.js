@@ -58,7 +58,7 @@ function randomXp() {
 }
 
 function xpNecesaria(nivel) {
-    return nivel === 0 ? 1 : 100 * nivel;
+    return nivel === 0 ? 1 : 90 * nivel;
 }
 
 async function asignarRoles(member, nivel, force) {

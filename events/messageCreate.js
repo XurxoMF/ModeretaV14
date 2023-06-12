@@ -199,7 +199,7 @@ module.exports = {
         cooldowns.add(message.author.id);
         setTimeout(() => {
             cooldowns.delete(message.author.id);
-        }, 60000);
+        }, 30_000);
         // NIVELES
     },
 };
