@@ -49,7 +49,7 @@ module.exports = {
             .setTitle("AYUDA - LISTA DE COMANDOS")
             .setColor("#a30584")
             .setDescription(
-                `**Básicos** 🌍\n\`\`\`${nomes["basicos"]}\`\`\`\n**Moderación** ⚒️\n\`\`\`${nomes["moderacion"]}\`\`\`\n**Niveles** 🆙\n\`\`\`${nomes["niveles"]}\`\`\`\n**Acciones** 🤙\n\`\`\`${nomes["acciones"]}\`\`\`\n**Reacciones** 🤝\n\`\`\`${nomes["reacciones"]}\`\`\`\n**Utilidad** ✅\n\`\`\`${nomes["utilidad"]}\`\`\`\n**Sofi** 🍑\n\`\`\`${nomes["sofi"]}\`\`\`**Bots** 🤖\n\`\`\`${nomes["bots"]}\`\`\``
+                `**Básicos** 🌍\n\`\`\`${nomes["basicos"]}\`\`\`\n**Moderación** ⚒️\n\`\`\`${nomes["moderacion"]}\`\`\`\n**Niveles** 🆙\n\`\`\`${nomes["niveles"]}\`\`\`\n**Acciones** 🤙\n\`\`\`${nomes["acciones"]}\`\`\`\n**Reacciones** 🤝\n\`\`\`${nomes["reacciones"]}\`\`\`\n**Utilidad** ✅\n\`\`\`${nomes["utilidad"]}\`\`\`\n**Sofi** 🍑\n\`\`\`${nomes["sofi"]}\`\`\`\n**Bots** 🤖\n\`\`\`${nomes["bots"]}\`\`\``
             )
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({
