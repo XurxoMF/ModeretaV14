@@ -20,14 +20,7 @@ module.exports = {
             embeds: [bienvenida],
         });
 
-        await member.roles.add([
-            "864649993453174805",
-            "864650641167351818",
-            "726143285545926736",
-            "898862006852009985",
-            "864656505541623849",
-            "1112837414440935454",
-        ]);
+        await member.roles.add(["726143285545926736"]);
 
         // Añadir rol muted si o usuario está muteado
         const muted = await db.MutedMembers.findOne({
