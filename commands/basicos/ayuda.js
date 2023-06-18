@@ -49,7 +49,7 @@ module.exports = {
             .setTitle("AYUDA - LISTA DE COMANDOS")
             .setColor("#a30584")
             .setDescription(
-                `**Básicos** 🌍\n\`\`\`${nomes["basicos"]}\`\`\`\n**Moderación** ⚒️\n\`\`\`${nomes["moderacion"]}\`\`\`\n**Niveles** 🆙\n\`\`\`${nomes["niveles"]}\`\`\`\n**Acciones** 🤙\n\`\`\`${nomes["acciones"]}\`\`\`\n**Reacciones** 🤝\n\`\`\`${nomes["reacciones"]}\`\`\`\n**Utilidad** ✅\n\`\`\`${nomes["utilidad"]}\`\`\`\n**Sofi** 🍑\n\`\`\`${nomes["sofi"]}\`\`\`\n**Bots** 🤖\n\`\`\`${nomes["bots"]}\`\`\``
+                `**Básicos** 🌍\n\`\`\`${nomes["basicos"]}\`\`\`\n**Niveles** 🆙\n\`\`\`${nomes["niveles"]}\`\`\`\n**Acciones** 🤙\n\`\`\`${nomes["acciones"]}\`\`\`\n**Reacciones** 🤝\n\`\`\`${nomes["reacciones"]}\`\`\`\n**Utilidad** ✅\n\`\`\`${nomes["utilidad"]}\`\`\`\n**Sofi** 🍑\n\`\`\`${nomes["sofi"]}\`\`\`\n**Bots** 🤖\n\`\`\`${nomes["bots"]}\`\`\``
             )
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({
@@ -64,14 +64,6 @@ module.exports = {
             .setTitle("AYUDA - BÁSICOS 🌍")
             .setColor("#a30584")
             .addFields(...info["basicos"])
-            .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
-            .setFooter({ text: paramType });
-
-        // Embed MODERACIÓN
-        const moderacionEmbed = new EmbedBuilder()
-            .setTitle("AYUDA - MODERACIÓN ⚒️")
-            .setColor("#a30584")
-            .addFields(...info["moderacion"])
             .setThumbnail("https://i.postimg.cc/ZY8nQy6v/info.png")
             .setFooter({ text: paramType });
 
@@ -129,9 +121,6 @@ module.exports = {
             .setPlaceholder("Selecciona categoría")
             .addOptions(
                 new StringSelectMenuOptionBuilder().setLabel("Básicos 🌍").setValue("basicos"),
-                new StringSelectMenuOptionBuilder()
-                    .setLabel("Moderación ⚒️")
-                    .setValue("moderacion"),
                 new StringSelectMenuOptionBuilder().setLabel("Niveles 🆙").setValue("niveles"),
                 new StringSelectMenuOptionBuilder().setLabel("Acciones 🤙").setValue("acciones"),
                 new StringSelectMenuOptionBuilder()
@@ -169,9 +158,6 @@ module.exports = {
                     break;
                 case "basicos":
                     i.update({ embeds: [basicosEmbed] });
-                    break;
-                case "moderacion":
-                    i.update({ embeds: [moderacionEmbed] });
                     break;
                 case "niveles":
                     i.update({ embeds: [nivelesEmbed] });

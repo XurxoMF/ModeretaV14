@@ -21,39 +21,7 @@ const client = new Client({
 client.rest.on("rateLimited", (info) => console.log("rate limited"));
 
 // TEMPORIZADORES
-setInterval(async () => {
-    // MUTEOS
-    const muteados = await db.MutedMembers.findAll({
-        where: { muted: true },
-    });
-
-    for (const muteado of muteados) {
-        if (muteado.fin * 1000 < Date.now()) {
-            const updated = await muteado.update({
-                muted: false,
-            });
-
-            const member = client.guilds.cache
-                .get("726133117722820671")
-                .members.cache?.get(`${muteado.memberId}`);
-
-            if (member !== undefined) {
-                member.roles.remove("1111054758350962758");
-            }
-
-            //Embed desmuteado
-            const embedUnmute = new EmbedBuilder()
-                .setTitle("Usuario desmuteado!")
-                .setDescription(`<@${updated.memberId}> ha sido desmutead@!`)
-                .setColor("#00ff00");
-
-            await client.channels.cache.get("1114591162779566110").send({
-                embeds: [embedUnmute],
-            });
-        }
-    }
-    // END MUTEOS
-}, 300_000);
+setInterval(async () => {}, 300_000);
 // END TEMPORIZADORES
 
 // COOLDOWNS
