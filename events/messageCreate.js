@@ -40,9 +40,9 @@ module.exports = {
         // END MÚSICA
 
         // SERIES USERS DROP
-        //Nori = 950166445034188820
+        //Nori = 742070928111960155
         //Gio = 556249326951727115
-        if (message.author.id === "950166445034188820") {
+        if (message.author.id === "742070928111960155") {
             let series = [];
             let userIds = new Set();
 
