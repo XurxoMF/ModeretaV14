@@ -50,16 +50,22 @@ module.exports = {
                 message.content.includes("**") &&
                 (message.content.startsWith(":heart:") || message.content.startsWith("❤️"))
             ) {
-                // drops char-serie
+                // drops normal
                 const lineas = message.content.split("\n");
                 for (const linea of lineas) {
                     series.push(linea.split("•")[3].trim());
                 }
-            } else if (message.content.startsWith(":heart:") || message.content.startsWith("❤️")) {
-                // drop de series
+            } else if (message.content.includes("**") && message.content.startsWith("`1]`")) {
+                // drop de char-serie por actividade
                 const lineas = message.content.split("\n");
                 for (const linea of lineas) {
-                    series.push(linea.split("•")[1].trim());
+                    series.push(linea.split("•")[4].trim());
+                }
+            } else if (!message.content.includes("**") && message.content.startsWith("`1]`")) {
+                // drop de serie por actividade
+                const lineas = message.content.split("\n");
+                for (const linea of lineas) {
+                    series.push(linea.split("•")[2].trim());
                 }
             }
 
