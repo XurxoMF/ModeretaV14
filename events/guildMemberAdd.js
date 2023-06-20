@@ -21,13 +21,5 @@ module.exports = {
         });
 
         await member.roles.add(["726143285545926736"]);
-
-        // Añadir rol muted si o usuario está muteado
-        const muted = await db.MutedMembers.findOne({
-            where: { memberId: member.id, muted: true },
-        });
-        if (muted !== null) {
-            member.roles.add("1111054758350962758");
-        }
     },
 };
