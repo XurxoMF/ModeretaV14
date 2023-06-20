@@ -42,7 +42,7 @@ module.exports = {
         // SERIES USERS DROP
         //Nori = 742070928111960155
         //Gio = 556249326951727115
-        if (message.author.id === "742070928111960155") {
+        if (message.author.id === "556249326951727115") {
             let series = [];
             let userIds = new Set();
 
@@ -55,11 +55,25 @@ module.exports = {
                 for (const linea of lineas) {
                     series.push(linea.split("•")[3].trim());
                 }
-            } else if (message.content.includes("**") && message.content.startsWith("`1]`")) {
+            } else if (
+                message.content.includes("**") &&
+                message.content.startsWith("`1]`") &&
+                message.content.includes("ɢ")
+            ) {
                 // drop de char-serie por actividade
                 const lineas = message.content.split("\n");
                 for (const linea of lineas) {
                     series.push(linea.split("•")[4].trim());
+                }
+            } else if (
+                message.content.includes("**") &&
+                message.content.startsWith("`1]`") &&
+                !message.content.includes("ɢ")
+            ) {
+                // drop de char-serie por actividade
+                const lineas = message.content.split("\n");
+                for (const linea of lineas) {
+                    series.push(linea.split("•")[3].trim());
                 }
             } else if (!message.content.includes("**") && message.content.startsWith("`1]`")) {
                 // drop de serie por actividade
