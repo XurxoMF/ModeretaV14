@@ -40,31 +40,24 @@ module.exports = {
         // END MÚSICA
 
         // SERIES USERS DROP
-        //Sofu = 950166445034188820
+        //Nori = 950166445034188820
         //Gio = 556249326951727115
         if (message.author.id === "950166445034188820") {
             let series = [];
             let userIds = new Set();
 
-            if (message.content.includes(", we've found the following cards for you")) {
-                // drop normal
-                const regex = /\* • \*.*\*/gim;
-                const seriesConAster = [...(await message.content.matchAll(regex))];
-                seriesConAster.forEach((s) => {
-                    series.push(s[0].slice(5, -1).toLowerCase());
-                });
-            } else if (message.content.includes("[3]")) {
+            if (message.content.includes("**") && message.content.startsWith("❤️")) {
+                // drops char-serie
+                const lineas = message.content.split("\n");
+                for (const linea of lineas) {
+                    series.push(linea.split("•")[3].trim());
+                }
+            } else if (message.content.startsWith("❤️")) {
                 // drop de series
-                const regex = /\*\*.*\*\*/gim;
-                const seriesConAster = [...(await message.content.matchAll(regex))];
-                seriesConAster.forEach((s) => {
-                    series.push(s[0].slice(2, -2).toLowerCase());
-                });
-            } else if (message.content.includes("[1]")) {
-                // captcha drop
-                const regex = /\* • \*.*\*/gim;
-                const serieConAster = [...(await message.content.matchAll(regex))];
-                series.push(serieConAster[0][0].slice(5, -1).toLowerCase());
+                const lineas = message.content.split("\n");
+                for (const linea of lineas) {
+                    series.push(linea.split("•")[1].trim());
+                }
             }
 
             if (series.length > 0) {
@@ -76,17 +69,17 @@ module.exports = {
                                 db.sequelize.where(
                                     db.sequelize.fn("LOWER", db.sequelize.col("serie")),
                                     "LIKE",
-                                    series[0]
+                                    series[0]?.toLowerCase()
                                 ),
                                 db.sequelize.where(
                                     db.sequelize.fn("LOWER", db.sequelize.col("serie")),
                                     "LIKE",
-                                    series[1]
+                                    series[1]?.toLowerCase()
                                 ),
                                 db.sequelize.where(
                                     db.sequelize.fn("LOWER", db.sequelize.col("serie")),
                                     "LIKE",
-                                    series[2]
+                                    series[2]?.toLowerCase()
                                 ),
                             ],
                         },
@@ -94,17 +87,15 @@ module.exports = {
                 });
 
                 const users = [...res];
-                const userSeries = {};
 
                 for (const u of users) {
                     const id = u.getDataValue("userId");
-                    const serie = u.getDataValue("serie").toLowerCase();
                     userIds.add(id);
-                    if (userSeries[serie] === undefined) {
-                        userSeries[serie] = [id];
-                    } else {
-                        userSeries[serie].push(id);
-                    }
+                }
+
+                for (const u of users) {
+                    const id = u.getDataValue("userId");
+                    userIds.add(id);
                 }
 
                 // envía pings as persoas cas series na súa lista
@@ -131,11 +122,27 @@ module.exports = {
                     });
 
                     collector.on("collect", async (i) => {
+                        // preparar obxeto de series
+                        const userSeries = {};
+                        for (const s of series) {
+                            userSeries[s] = [];
+                            for (const u of users) {
+                                if (u.getDataValue("serie").toLowerCase() === s.toLowerCase()) {
+                                    userSeries[s].push(u.getDataValue("userId"));
+                                }
+                            }
+                        }
+
+                        // preparar embed
                         const fields = [];
                         for (const s in userSeries) {
                             let line = ``;
-                            for (const uid of userSeries[s]) {
-                                line += `<@${uid}>, `;
+                            if (userSeries[s].length === 0) {
+                                line = `\`Sin usuarios\`, `;
+                            } else {
+                                for (const uid of userSeries[s]) {
+                                    line += `<@${uid}>, `;
+                                }
                             }
                             line = line.slice(0, -2);
                             fields.push({ name: s, value: line });
