@@ -42,17 +42,20 @@ module.exports = {
         // SERIES USERS DROP
         //Nori = 742070928111960155
         //Gio = 556249326951727115
-        if (message.author.id === "742070928111960155") {
+        if (message.author.id === "556249326951727115") {
             let series = [];
             let userIds = new Set();
 
-            if (message.content.includes("**") && message.content.startsWith("❤️")) {
+            if (
+                message.content.includes("**") &&
+                (message.content.startsWith(":heart:") || message.content.startsWith("❤️"))
+            ) {
                 // drops char-serie
                 const lineas = message.content.split("\n");
                 for (const linea of lineas) {
                     series.push(linea.split("•")[3].trim());
                 }
-            } else if (message.content.startsWith("❤️")) {
+            } else if (message.content.startsWith(":heart:") || message.content.startsWith("❤️")) {
                 // drop de series
                 const lineas = message.content.split("\n");
                 for (const linea of lineas) {
