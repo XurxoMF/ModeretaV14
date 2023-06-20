@@ -42,7 +42,7 @@ module.exports = {
         // SERIES USERS DROP
         //Nori = 742070928111960155
         //Gio = 556249326951727115
-        if (message.author.id === "556249326951727115") {
+        if (message.author.id === "742070928111960155") {
             let series = [];
             let userIds = new Set();
 
