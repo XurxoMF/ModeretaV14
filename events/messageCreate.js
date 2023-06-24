@@ -40,46 +40,52 @@ module.exports = {
         // END MÚSICA
 
         // SERIES USERS DROP
+        //Sofu = 950166445034188820
         //Nori = 742070928111960155
         //Gio = 556249326951727115
-        if (message.author.id === "742070928111960155") {
+        if (
+            message.author.id === "950166445034188820" ||
+            message.author.id === "742070928111960155"
+        ) {
             let series = [];
             let userIds = new Set();
 
             if (
-                message.content.includes("**") &&
-                (message.content.startsWith(":heart:") || message.content.startsWith("❤️"))
+                message.author.id === "950166445034188820" &&
+                message.content.includes(", we've found the following cards for you")
             ) {
-                // drops normal
-                const lineas = message.content.split("\n");
-                for (const linea of lineas) {
-                    series.push(linea.split("•")[3].trim());
+                // drop normal SOFU
+                const frases = message.content.split("\n");
+                for (let i = 1; i < frases.length; i++) {
+                    series.push(frases[i].split(" • ")[2].slice(1, -1));
                 }
-            } else if (
-                message.content.includes("**") &&
-                message.content.startsWith("`1]`") &&
-                message.content.includes("ɢ")
-            ) {
-                // drop de char-serie por actividade
-                const lineas = message.content.split("\n");
-                for (const linea of lineas) {
-                    series.push(linea.split("•")[4].trim());
-                }
-            } else if (
-                message.content.includes("**") &&
-                message.content.startsWith("`1]`") &&
-                !message.content.includes("ɢ")
-            ) {
-                // drop de char-serie por actividade
-                const lineas = message.content.split("\n");
-                for (const linea of lineas) {
-                    series.push(linea.split("•")[3].trim());
-                }
-            } else if (!message.content.includes("**") && message.content.startsWith("`1]`")) {
-                // drop de serie por actividade
-                const lineas = message.content.split("\n");
-                for (const linea of lineas) {
-                    series.push(linea.split("•")[2].trim());
+            } else if (message.author.id === "742070928111960155") {
+                if (
+                    message.content.includes("**") &&
+                    message.content.startsWith("`1]`") &&
+                    message.content.includes("ɢ")
+                ) {
+                    // drop de char-serie por actividade
+                    const lineas = message.content.split("\n");
+                    for (const linea of lineas) {
+                        series.push(linea.split("•")[4].trim());
+                    }
+                } else if (
+                    message.content.includes("**") &&
+                    message.content.startsWith("`1]`") &&
+                    !message.content.includes("ɢ")
+                ) {
+                    // drop de char-serie por actividade sin g
+                    const lineas = message.content.split("\n");
+                    for (const linea of lineas) {
+                        series.push(linea.split("•")[3].trim());
+                    }
+                } else if (!message.content.includes("**") && message.content.startsWith("`1]`")) {
+                    // drop de serie por actividade
+                    const lineas = message.content.split("\n");
+                    for (const linea of lineas) {
+                        series.push(linea.split("•")[2].trim());
+                    }
                 }
             }
 
