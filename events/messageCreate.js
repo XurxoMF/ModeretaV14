@@ -60,6 +60,10 @@ module.exports = {
                     series.push(frases[i].split(" • ")[2].slice(1, -1));
                 }
             } else if (message.author.id === "742070928111960155") {
+                message.channel.send({
+                    content: `<@&${1096410227408121898}> Sofi está dropeando por actividad!!`,
+                });
+
                 if (
                     message.content.includes("**") &&
                     message.content.startsWith("`1]`") &&
