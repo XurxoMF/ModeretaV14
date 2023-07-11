@@ -61,16 +61,6 @@ module.exports = {
                 }
             } else if (message.author.id === "742070928111960155") {
                 if (
-                    (message.content.includes("1]") && message.content.includes(":heart:")) ||
-                    message.content.includes("❤️")
-                ) {
-                    // ping de drop de Sofi
-                    message.channel.send({
-                        content: `<@&${"1096410227408121898"}> Sofi está dropeando por actividad!!`,
-                    });
-                }
-
-                if (
                     message.content.includes("**") &&
                     message.content.startsWith("`1]`") &&
                     message.content.includes("ɢ")
