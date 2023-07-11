@@ -41,162 +41,161 @@ module.exports = {
 
         // SERIES USERS DROP
         //Sofu = 950166445034188820
-        //Nori = 742070928111960155
         //Gio = 556249326951727115
-        if (
-            message.author.id === "950166445034188820" ||
-            message.author.id === "742070928111960155"
-        ) {
-            let series = [];
-            let userIds = new Set();
+        // if (message.author.id === "556249326951727115") {
+        //     const msgCont = message.content;
 
-            if (
-                message.author.id === "950166445034188820" &&
-                message.content.includes(", we've found the following cards for you")
-            ) {
-                // drop normal SOFU
-                const frases = message.content.split("\n");
-                for (let i = 1; i < frases.length; i++) {
-                    series.push(frases[i].split(" • ")[2].slice(1, -1));
-                }
-            } else if (message.author.id === "742070928111960155") {
-                if (
-                    message.content.includes("**") &&
-                    message.content.startsWith("`1]`") &&
-                    message.content.includes("ɢ")
-                ) {
-                    // drop de char-serie por actividade
-                    const lineas = message.content.split("\n");
-                    for (const linea of lineas) {
-                        series.push(linea.split("•")[4].trim());
-                    }
-                } else if (
-                    message.content.includes("**") &&
-                    message.content.startsWith("`1]`") &&
-                    !message.content.includes("ɢ")
-                ) {
-                    // drop de char-serie por actividade sin g
-                    const lineas = message.content.split("\n");
-                    for (const linea of lineas) {
-                        series.push(linea.split("•")[3].trim());
-                    }
-                } else if (!message.content.includes("**") && message.content.startsWith("`1]`")) {
-                    // drop de serie por actividade
-                    const lineas = message.content.split("\n");
-                    for (const linea of lineas) {
-                        series.push(linea.split("•")[2].trim());
-                    }
-                }
-            }
+        //     console.log(msgCont);
 
-            if (series.length > 0) {
-                // busca os usuarios que coleccionan as series dropeadas
-                const res = await db.SeriesUsers.findAll({
-                    where: {
-                        serie: {
-                            [db.Sequelize.Op.or]: [
-                                db.sequelize.where(
-                                    db.sequelize.fn("LOWER", db.sequelize.col("serie")),
-                                    "LIKE",
-                                    series[0]?.toLowerCase()
-                                ),
-                                db.sequelize.where(
-                                    db.sequelize.fn("LOWER", db.sequelize.col("serie")),
-                                    "LIKE",
-                                    series[1]?.toLowerCase()
-                                ),
-                                db.sequelize.where(
-                                    db.sequelize.fn("LOWER", db.sequelize.col("serie")),
-                                    "LIKE",
-                                    series[2]?.toLowerCase()
-                                ),
-                            ],
-                        },
-                    },
-                });
+        //     let series = [];
+        //     let userIds = new Set();
 
-                const users = [...res];
+        //     if (msgCont.startsWith("- ")) {
 
-                for (const u of users) {
-                    const id = u.getDataValue("userId");
-                    userIds.add(id);
-                }
+        //     }
 
-                for (const u of users) {
-                    const id = u.getDataValue("userId");
-                    userIds.add(id);
-                }
+        //if (message.content.includes("")) {
+        //     // drop normal SOFU
+        //     const frases = message.content.split("\n");
+        //     for (let i = 1; i < frases.length; i++) {
+        //         series.push(frases[i].split(" • ")[2].slice(1, -1));
+        //     }
+        // } else if (
+        //     message.content.includes("**") &&
+        //     message.content.startsWith("`1]`") &&
+        //     message.content.includes("ɢ")
+        // ) {
+        //     // drop de char-serie por actividade
+        //     const lineas = message.content.split("\n");
+        //     for (const linea of lineas) {
+        //         series.push(linea.split("•")[4].trim());
+        //     }
+        // } else if (
+        //     message.content.includes("**") &&
+        //     message.content.startsWith("`1]`") &&
+        //     !message.content.includes("ɢ")
+        // ) {
+        //     // drop de char-serie por actividade sin g
+        //     const lineas = message.content.split("\n");
+        //     for (const linea of lineas) {
+        //         series.push(linea.split("•")[3].trim());
+        //     }
+        // } else if (!message.content.includes("**") && message.content.startsWith("`1]`")) {
+        //     // drop de serie por actividade
+        //     const lineas = message.content.split("\n");
+        //     for (const linea of lineas) {
+        //         series.push(linea.split("•")[2].trim());
+        //     }
+        // }
 
-                // envía pings as persoas cas series na súa lista
-                if (userIds.size > 0) {
-                    let res = "";
-                    for (const uid of userIds) {
-                        res += `<@${uid}> `;
-                    }
+        //     if (series.length > 0) {
+        //         // busca os usuarios que coleccionan as series dropeadas
+        //         const res = await db.SeriesUsers.findAll({
+        //             where: {
+        //                 serie: {
+        //                     [db.Sequelize.Op.or]: [
+        //                         db.sequelize.where(
+        //                             db.sequelize.fn("LOWER", db.sequelize.col("serie")),
+        //                             "LIKE",
+        //                             series[0]?.toLowerCase()
+        //                         ),
+        //                         db.sequelize.where(
+        //                             db.sequelize.fn("LOWER", db.sequelize.col("serie")),
+        //                             "LIKE",
+        //                             series[1]?.toLowerCase()
+        //                         ),
+        //                         db.sequelize.where(
+        //                             db.sequelize.fn("LOWER", db.sequelize.col("serie")),
+        //                             "LIKE",
+        //                             series[2]?.toLowerCase()
+        //                         ),
+        //                     ],
+        //                 },
+        //             },
+        //         });
 
-                    const boton = new ButtonBuilder()
-                        .setCustomId("lista_series")
-                        .setLabel("📑")
-                        .setStyle(ButtonStyle.Primary);
-                    const row = new ActionRowBuilder().addComponents(boton);
+        //         const users = [...res];
 
-                    const resMes = await message.reply({
-                        content: `${res}se dropearon cartas de tu lista!`,
-                        components: [row],
-                    });
+        //         for (const u of users) {
+        //             const id = u.getDataValue("userId");
+        //             userIds.add(id);
+        //         }
 
-                    const collector = resMes.createMessageComponentCollector({
-                        componentType: ComponentType.Button,
-                        idle: 50_000,
-                    });
+        //         for (const u of users) {
+        //             const id = u.getDataValue("userId");
+        //             userIds.add(id);
+        //         }
 
-                    collector.on("collect", async (i) => {
-                        // preparar obxeto de series
-                        const userSeries = {};
-                        for (const s of series) {
-                            userSeries[s] = [];
-                            for (const u of users) {
-                                if (u.getDataValue("serie").toLowerCase() === s.toLowerCase()) {
-                                    userSeries[s].push(u.getDataValue("userId"));
-                                }
-                            }
-                        }
+        //         // envía pings as persoas cas series na súa lista
+        //         if (userIds.size > 0) {
+        //             let res = "";
+        //             for (const uid of userIds) {
+        //                 res += `<@${uid}> `;
+        //             }
 
-                        // preparar embed
-                        const fields = [];
-                        for (const s in userSeries) {
-                            let line = ``;
-                            if (userSeries[s].length === 0) {
-                                line = `\`Sin usuarios\`, `;
-                            } else {
-                                for (const uid of userSeries[s]) {
-                                    line += `<@${uid}>, `;
-                                }
-                            }
-                            line = line.slice(0, -2);
-                            fields.push({ name: s, value: line });
-                        }
+        //             const boton = new ButtonBuilder()
+        //                 .setCustomId("lista_series")
+        //                 .setLabel("📑")
+        //                 .setStyle(ButtonStyle.Primary);
+        //             const row = new ActionRowBuilder().addComponents(boton);
 
-                        const embed = new EmbedBuilder()
-                            .setTitle("Series coleccionadas por cada usuario:")
-                            .setColor("#a30584")
-                            .addFields(...fields);
+        //             const resMes = await message.reply({
+        //                 content: `${res}se dropearon cartas de tu lista!`,
+        //                 components: [row],
+        //             });
 
-                        try {
-                            i.reply({
-                                embeds: [embed],
-                                ephemeral: true,
-                            });
-                        } catch (err) {
-                            i.reply({
-                                content: "Ha ocurrido un error, inténtalo de nuevo ^^",
-                                ephemeral: true,
-                            });
-                        }
-                    });
-                }
-            }
-        }
+        //             const collector = resMes.createMessageComponentCollector({
+        //                 componentType: ComponentType.Button,
+        //                 idle: 50_000,
+        //             });
+
+        //             collector.on("collect", async (i) => {
+        //                 // preparar obxeto de series
+        //                 const userSeries = {};
+        //                 for (const s of series) {
+        //                     userSeries[s] = [];
+        //                     for (const u of users) {
+        //                         if (u.getDataValue("serie").toLowerCase() === s.toLowerCase()) {
+        //                             userSeries[s].push(u.getDataValue("userId"));
+        //                         }
+        //                     }
+        //                 }
+
+        //                 // preparar embed
+        //                 const fields = [];
+        //                 for (const s in userSeries) {
+        //                     let line = ``;
+        //                     if (userSeries[s].length === 0) {
+        //                         line = `\`Sin usuarios\`, `;
+        //                     } else {
+        //                         for (const uid of userSeries[s]) {
+        //                             line += `<@${uid}>, `;
+        //                         }
+        //                     }
+        //                     line = line.slice(0, -2);
+        //                     fields.push({ name: s, value: line });
+        //                 }
+
+        //                 const embed = new EmbedBuilder()
+        //                     .setTitle("Series coleccionadas por cada usuario:")
+        //                     .setColor("#a30584")
+        //                     .addFields(...fields);
+
+        //                 try {
+        //                     i.reply({
+        //                         embeds: [embed],
+        //                         ephemeral: true,
+        //                     });
+        //                 } catch (err) {
+        //                     i.reply({
+        //                         content: "Ha ocurrido un error, inténtalo de nuevo ^^",
+        //                         ephemeral: true,
+        //                     });
+        //                 }
+        //             });
+        //         }
+        //     }
+        // }
         // END SERIES USERS DROP
 
         // KARUTA DROP PING
