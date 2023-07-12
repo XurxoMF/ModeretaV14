@@ -72,19 +72,13 @@ module.exports = {
             let series = [];
             let userIds = new Set();
 
-            console.log(message.content);
-
             if (
                 message.author.id === "950166445034188820" &&
                 message.content.includes("has dropeado estas cartas!")
             ) {
-                console.log("dentro");
                 const frases = message.content.split("\n");
-                console.log(frases);
                 for (const frase of frases) {
-                    console.log(frase);
                     if (frase.startsWith("> ")) {
-                        console.log(frase.split(" • ")[2]);
                         series.push(frase.split(" • ")[2]);
                     }
                 }
