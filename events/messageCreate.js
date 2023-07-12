@@ -71,9 +71,8 @@ module.exports = {
         if (message.author.id === "950166445034188820") {
             const msgCont = message.content;
 
-            console.log(msgCont);
-
             let series = [];
+
             let userIds = new Set();
 
             if (
@@ -83,7 +82,9 @@ module.exports = {
             ) {
                 const frases = message.content.split("\n");
                 for (const frase of frases) {
+                    console.log(frase);
                     if (frase.startsWith("> ")) {
+                        console.log(frase.split(" • ")[2]);
                         series.push(frase.split(" • ")[2]);
                     }
                 }
