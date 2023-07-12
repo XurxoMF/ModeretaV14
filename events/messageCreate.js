@@ -69,10 +69,10 @@ module.exports = {
         //Sofu = 950166445034188820
         //Gio = 556249326951727115
         if (message.author.id === "950166445034188820") {
-            const msgCont = message.content;
-
             let series = [];
             let userIds = new Set();
+
+            console.log(message.content);
 
             if (
                 message.author.id === "950166445034188820" &&
