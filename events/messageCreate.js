@@ -72,7 +72,6 @@ module.exports = {
             const msgCont = message.content;
 
             let series = [];
-
             let userIds = new Set();
 
             if (
@@ -80,7 +79,9 @@ module.exports = {
                 message.content.startsWith("> ") &&
                 message.content.includes("has dropeado estas cartas!")
             ) {
+                console.log("dentro");
                 const frases = message.content.split("\n");
+                console.log(frases);
                 for (const frase of frases) {
                     console.log(frase);
                     if (frase.startsWith("> ")) {
