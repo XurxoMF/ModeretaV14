@@ -68,15 +68,14 @@ module.exports = {
         // SERIES DROP
         //Sofu = 950166445034188820
         //Gio = 556249326951727115
-        if (message.author.id === "556249326951727115") {
+        if (message.author.id === "950166445034188820") {
             let series = [];
             let userIds = new Set();
 
             console.log(message.content);
 
             if (
-                message.author.id === "556249326951727115" &&
-                message.content.startsWith("> ") &&
+                message.author.id === "950166445034188820" &&
                 message.content.includes("has dropeado estas cartas!")
             ) {
                 console.log("dentro");
