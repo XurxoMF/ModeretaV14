@@ -42,7 +42,7 @@ module.exports = {
         // PING DROPS SOFI
         if (
             message.channel.id === "1101853797573206016" &&
-            message.author.id === "1128578188503683092"
+            message.author.id === "853629533855809596"
         ) {
             const embed = message.embeds.length >= 1 ? message.embeds[0] : undefined;
 
